@@ -154,7 +154,7 @@ public class Rhabdomancer extends GhidraScript
 		bad.put("[BAD 2]", tier2);
 
 		// enumerate candidate points at each tier
-		Iterator<Map.Entry<String,List<String>>> i = bad.entrySet().iterator();
+		Iterator<Map.Entry<String, List<String>>> i = bad.entrySet().iterator();
 		while (i.hasNext()) {
 			funcs.clear();
 			Map.Entry<String, List<String>> entry = i.next();
