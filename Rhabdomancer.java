@@ -23,7 +23,7 @@
  *
  * Usage:
  * - Copy the script into your ghidra_scripts directory
- * - Open the Script Manager in Ghidra and execute the script
+ * - Open the Script Manager in Ghidra and run the script
  * - You can also run it via the Tools > Rhabdomancer menu or the shurtcut "Y"
  * - Open Window > Comments and navigate [BAD] candidate points in tier 0-2
  *
@@ -165,6 +165,8 @@ public class Rhabdomancer extends GhidraScript
 	}
 
 	// collect Function objects associated with the specified name
+	// @param name function name
+	// @param list list to add collected Function objects to
 	public void getFunctions(String name, List<Function> list) 
 	{
 		SymbolTable st = currentProgram.getSymbolTable();
@@ -179,6 +181,8 @@ public class Rhabdomancer extends GhidraScript
 	}
 
 	// process cross-references to a function and list calls
+	// @param dstFunc destination function
+	// @param tag comment tag
 	public void listCalls(Function dstFunc, String tag) 
 	{
 		String dstName = dstFunc.getName();
