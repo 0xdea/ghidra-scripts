@@ -188,7 +188,7 @@ public class Rhabdomancer extends GhidraScript
 	{
 		String dstName = dstFunc.getName();
 		Address dstAddr = dstFunc.getEntryPoint();
-		Reference refs[] = getReferencesTo(dstAddr);
+		Reference refs[] = getReferencesTo(dstAddr); // limited to 4096 records
 
 		printf("%s is called from:\n", dstName);
 
