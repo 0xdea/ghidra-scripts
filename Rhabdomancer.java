@@ -57,7 +57,7 @@ public class Rhabdomancer extends GhidraScript
 	{
 		// these functions are generally considered insecure
 		// see also https://github.com/x509cert/banned/blob/master/banned.h
-		List<String> tier0 = new ArrayList<String>(List.of(
+		List<String> tier0 = new ArrayList<>(List.of(
 			// strcpy family
 			"strcpy", "strcpyA", "strcpyW", "wcscpy", "_tcscpy", "_mbscpy", "StrCpy", "StrCpyA",
 			"StrCpyW", "lstrcpy", "lstrcpyA", "lstrcpyW", "_tccpy", "_mbccpy", "_ftcscpy",
@@ -81,7 +81,7 @@ public class Rhabdomancer extends GhidraScript
 		));
 
 		// these functions are interesting and should be checked for insecure use cases
-		List<String> tier1 = new ArrayList<String>(List.of(
+		List<String> tier1 = new ArrayList<>(List.of(
 			// strncpy needs explicit null-termination, e.g. buf[sizeof(buf) – 1] = 0
 			"strncpy", "wcsncpy", "_tcsncpy", "_mbsncpy", "_mbsnbcpy", "StrCpyN", "StrCpyNA",
 			"StrCpyNW", "StrNCpy", "strcpynA", "StrNCpyA", "StrNCpyW", "lstrcpyn", "lstrcpynA",
@@ -118,7 +118,7 @@ public class Rhabdomancer extends GhidraScript
 		));
 
 		// code paths involving these functions should be carefully checked
-		List<String> tier2 = new ArrayList<String>(List.of(
+		List<String> tier2 = new ArrayList<>(List.of(
 			// check for insecure use of environment vars
 			"getenv",
 			// check for insecure use of memory allocation functions
@@ -142,14 +142,14 @@ public class Rhabdomancer extends GhidraScript
 		));
 
 		// function list
-		List<Function> funcs = new ArrayList<Function>();
+		List<Function> funcs = new ArrayList<>();
 
 		printf("\nRhabdomancer - A Ghidra vulnerability research assistant\n");
 		printf("Copyright (c) 2021 Marco Ivaldi <raptor@0xdeadbeef.info>\n\n");
 		printf("Listing calls to potentially insecure functions...\n");
 
 		// populate tier map
-		Map<String, List<String>> bad = new LinkedHashMap<String, List<String>>();
+		Map<String, List<String>> bad = new LinkedHashMap<>();
 		bad.put("[BAD 0]", tier0);
 		bad.put("[BAD 1]", tier1);
 		bad.put("[BAD 2]", tier2);
@@ -160,8 +160,8 @@ public class Rhabdomancer extends GhidraScript
 			funcs.clear();
 			Map.Entry<String, List<String>> entry = i.next();
 			printf("\n%s\n\n", entry.getKey());
-			entry.getValue().forEach((s) -> getFunctions(s, funcs));
-			funcs.forEach((f) -> listCalls(f, entry.getKey() + " " + f.getName()));
+			entry.getValue().forEach(s -> getFunctions(s, funcs));
+			funcs.forEach(f -> listCalls(f, entry.getKey() + " " + f.getName()));
 		}
 	}
 
@@ -188,7 +188,7 @@ public class Rhabdomancer extends GhidraScript
 	{
 		String dstName = dstFunc.getName();
 		Address dstAddr = dstFunc.getEntryPoint();
-		Reference refs[] = getReferencesTo(dstAddr); // limited to 4096 records
+		Reference[] refs = getReferencesTo(dstAddr); // limited to 4096 records
 
 		printf("%s is called from:\n", dstName);
 
