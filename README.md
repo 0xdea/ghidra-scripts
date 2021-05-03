@@ -7,5 +7,8 @@
 
 A collection of my Ghidra scripts to facilitate reverse engineering and vulnerability research.
 
+## iOS
+* **FOX-alpha.java**. This script tries to fix Objective-C cross-references in iOS apps.
+
 ## VulnDev
 * **Rhabdomancer.java**. This script locates all calls to potentially insecure functions.
