@@ -85,7 +85,7 @@ public class FOX extends GhidraScript
 		// function list
 		List<Function> functions = new ArrayList<>();
 
-		printf("\nFOX 1.0 - Fix Objective-C XREFs in Ghidra (AARCH64 only)\n");
+		printf("\nFOX-alpha - Fix Objective-C XREFs @Ghidra (AARCH64 only)\n");
 		printf("Copyright (c) 2021 Marco Ivaldi <raptor@0xdeadbeef.info>\n\n");
 		printf("Attempting to fix Objective-C XREFs...\n\n");
 
