@@ -28,7 +28,7 @@
  * - You can also run it via the Tools > Rhabdomancer menu or the shurtcut "Y"
  * - Open Window > Comments and navigate [BAD] candidate points in tier 0-2
  *
- * Inspired by The Ghidra Book (No Starch, 2020). Tested with Ghidra v9.2.1.
+ * Inspired by The Ghidra Book (No Starch, 2020). Tested with Ghidra v10.1.1.
  */
 
 // This script locates all calls to potentially insecure functions, in order to
@@ -74,7 +74,7 @@ public class Rhabdomancer extends GhidraScript
 			"snscanf", "_snscanf", "snwscanf", "_snwscanf", "_sntscanf",
 			// gets family
 			"gets", "_getts", "_getws", "_gettws", "getpw",
-			// insecure memory allocation
+			// insecure memory allocation on the stack, can also cause stack clash
 			"alloca", "_alloca",
 			// insecure temporary file creation
 			"mktemp", "tmpnam", "tempnam"
@@ -82,11 +82,11 @@ public class Rhabdomancer extends GhidraScript
 
 		// these functions are interesting and should be checked for insecure use cases
 		List<String> tier1 = new ArrayList<>(List.of(
-			// strncpy needs explicit null-termination, e.g. buf[sizeof(buf) – 1] = 0
+			// strncpy needs explicit null-termination: buf[sizeof(buf) – 1] = '\0'
 			"strncpy", "wcsncpy", "_tcsncpy", "_mbsncpy", "_mbsnbcpy", "StrCpyN", "StrCpyNA",
 			"StrCpyNW", "StrNCpy", "strcpynA", "StrNCpyA", "StrNCpyW", "lstrcpyn", "lstrcpynA",
 			"lstrcpynW", "_csncpy", "wcscpyn",
-			// to prevent off-by-one bugs, strncat must be called with sizeof(buf) - strlen(buf) - 1
+			// strncat must be called with: sizeof(buf) - strlen(buf) - 1 to prevent off-by-one bugs (beware of underflow)
 			"strncat", "wcsncat", "_tcsncat", "_mbsncat", "_mbsnbcat", "StrCatN", "StrCatNA",
 			"StrCatNW", "StrNCat", "StrNCatA", "StrNCatW", "lstrncat", "lstrcatnA", "lstrcatnW",
 			"lstrcatn",
@@ -94,7 +94,7 @@ public class Rhabdomancer extends GhidraScript
 			"strlcpy",
 			// strlcat returns strlen(src) + strlen(dst), which can be larger than the dst buffer
 			"strlcat",
-			// strlen can be dangerous with short integers
+			// strlen can be dangerous with short integers (and potentially also with signed int)
 			"strlen", "lstrlen",
 			// string token functions can be dangerous as well
 			"strtok", "_tcstok", "wcstok", "_mbstok",
@@ -102,18 +102,20 @@ public class Rhabdomancer extends GhidraScript
 			"snprintf", "_sntprintf", "_snprintf", "_snwprintf", "vsnprintf", "_vsnprintf",
 			"_vsnwprintf", "wnsprintf", "wnsprintfA", "wnsprintfW", "_vsntprintf", "wvnsprintf",
 			"wvnsprintfA", "wvnsprintfW",
-			// memory copying functions can be used insecurely
+			// memory copying functions can be used insecurely, check if size arg can contain negative numbers
 			"memcpy", "memccpy", "memmove", "bcopy", "wmemcpy", "wmemmove", "RtlCopyMemory", "CopyMemory",
-			// user id and group id functions can be used insecurely
+			// user id and group id functions can be used insecurely, return value must be checked
 			"setuid", "seteuid", "setreuid", "setresuid",
 			"setgid", "setegid", "setregid", "setresgid", "setgroups", "initgroups",
 			// exec* and related functions can be used insecurely
+			// functions without "-e" suffix take the environment from the extern variable environ of calling process
 			"execl", "execlp", "execle", "execv", "execvp", "execvpe",
 			"system", "fork", "pipe", "popen",
 			// i/o functions can be used insecurely
-			"open", "openat", "fopen", "freopen",
+			"open", "openat", "fopen", "freopen", "dlopen",
 			"read", "fread", // check read from unreadable paths/files and from writable paths/files
 			"write", "fwrite", // check write to unwritable paths/files
+			"recv", "recvfrom", // check for null-termination
 			"fgets"
 		));
 
@@ -121,9 +123,16 @@ public class Rhabdomancer extends GhidraScript
 		List<String> tier2 = new ArrayList<>(List.of(
 			// check for insecure use of environment vars
 			"getenv",
+			// check for insecure use of arguments
+			"getopt", "getopt_long",
 			// check for insecure use of memory allocation functions
-			"malloc", "calloc", "realloc", "free",
+			// check if size arg can contain negative numbers or zero, return value must be checked
+			"malloc", 
+			"calloc", // potential implicit overflow due to integer wrapping
+			"realloc", // doesn't initialize memory to zero; realloc(0) is equivalent to free
+			"free", // check for incorrect use, double free, use after free
 			// check for file access bugs
+			"mkdir", "creat",
 			"link", "linkat", "symlink", "symlinkat", "readlink", "readlinkat", "unlink", "unlinkat",
 			"rename", "renameat",
 			"stat", "lstat", "fstat", "fstatat",
@@ -135,10 +144,14 @@ public class Rhabdomancer extends GhidraScript
 			// check for makepath and splitpath bugs
 			"makepath", "_tmakepath", "_makepath", "_wmakepath", "_splitpath", "_tsplitpath", "_wsplitpath",
 			// check for format string bugs (all functions that use va_list args should be checked!)
-			"syslog"
+			"syslog",
+			// check for locale bugs
+			"setlocale", "catopen"
 			// kill, *sig*, *jmp* functions should be checked for signal-handling related vulnerabilities
 			// *sem*, *mutex* functions should be checked for other concurrency-related vulnerabilities
-			// integer bugs should be absolutely taken into account as they are more subtle and widespread!
+			// new, new []: potential implicit overflow with scalar constructor
+			// delete, delete []: check for misalignment with constructor 
+			// integer bugs should be also taken into account as they are more subtle and widespread!
 		));
 
 		// function list

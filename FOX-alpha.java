@@ -69,7 +69,7 @@ import ghidra.program.model.lang.*;
 import ghidra.program.model.address.*;
 import ghidra.app.util.DisplayableEol;
 
-public class FOX extends GhidraScript 
+public class FOX-alpha extends GhidraScript 
 {
 	@Override
 	public void run() throws Exception
