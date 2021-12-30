@@ -66,7 +66,7 @@ public class Rhabdomancer extends GhidraScript
 			"StrCatW", "lstrcat", "lstrcatA", "lstrcatW", "StrCatBuff", "StrCatBuffA", "StrCatBuffW",
 			"StrCatChainW", "_tccat", "_mbccat", "_ftcscat",
 			// sprintf family
-			"sprintf", "_sprintf", "_vsprintf", "vsprintf", "swprintf", "vsprintf", "vswprintf",
+			"sprintf", "_sprintf", "_sprintf_c89", "_vsprintf", "vsprintf", "swprintf", "vsprintf", "vswprintf",
 			"_wsprintfA", "_wsprintfW", "sprintfW", "sprintfA", "wsprintf", "wsprintfW", "wsprintfA",
 			"swprintf", "_stprintf", "wvsprintf", "wvsprintfA", "wvsprintfW", "_vstprintf",
 			// scanf family
