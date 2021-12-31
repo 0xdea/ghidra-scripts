@@ -59,18 +59,24 @@ public class Rhabdomancer extends GhidraScript
 		// see also https://github.com/x509cert/banned/blob/master/banned.h
 		List<String> tier0 = new ArrayList<>(List.of(
 			// strcpy family
-			"strcpy", "strcpyA", "strcpyW", "wcscpy", "_tcscpy", "_mbscpy", "StrCpy", "StrCpyA",
-			"StrCpyW", "lstrcpy", "lstrcpyA", "lstrcpyW", "_tccpy", "_mbccpy", "_ftcscpy",
+			"strcpy", "strcpyA", "strcpyW", "wcscpy", "_tcscpy", "_mbscpy", 
+			"StrCpy", "StrCpyA", "StrCpyW", 
+			"lstrcpy", "lstrcpyA", "lstrcpyW", "_tccpy", "_mbccpy", "_ftcscpy",
 			// strcat family
-			"strcat", "strcatA", "strcatW", "wcscat", "_tcscat", "_mbscat", "StrCat", "StrCatA",
-			"StrCatW", "lstrcat", "lstrcatA", "lstrcatW", "StrCatBuff", "StrCatBuffA", "StrCatBuffW",
-			"StrCatChainW", "_tccat", "_mbccat", "_ftcscat",
+			"strcat", "strcatA", "strcatW", "wcscat", "_tcscat", "_mbscat", 
+			"StrCat", "StrCatA", "StrCatW", 
+			"lstrcat", "lstrcatA", "lstrcatW", 
+			"StrCatBuff", "StrCatBuffA", "StrCatBuffW", "StrCatChainW", 
+			"_tccat", "_mbccat", "_ftcscat",
 			// sprintf family
-			"sprintf", "_sprintf", "_sprintf_c89", "_vsprintf", "vsprintf", "swprintf", "vsprintf", "vswprintf",
-			"_wsprintfA", "_wsprintfW", "sprintfW", "sprintfA", "wsprintf", "wsprintfW", "wsprintfA",
+			"sprintf", "_sprintf", "_sprintf_c89", 
+			"vsprintf", "_vsprintf", "_vsprintf_c89", 
+			"swprintf", "vswprintf",
+			"_wsprintfA", "_wsprintfW", "sprintfW", "sprintfA", "wsprintf", "wsprintfW", "wsprintfA", 
 			"swprintf", "_stprintf", "wvsprintf", "wvsprintfA", "wvsprintfW", "_vstprintf",
 			// scanf family
-			"scanf", "wscanf", "_tscanf", "sscanf", "fscanf", "fwscanf", "swscanf", "_stscanf",
+			"scanf", "wscanf", "_tscanf", "sscanf", "_sscanf_c89", 
+			"fscanf", "fwscanf", "swscanf", "_stscanf",
 			"snscanf", "_snscanf", "snwscanf", "_snwscanf", "_sntscanf",
 			// gets family
 			"gets", "_getts", "_getws", "_gettws", "getpw",
@@ -83,13 +89,13 @@ public class Rhabdomancer extends GhidraScript
 		// these functions are interesting and should be checked for insecure use cases
 		List<String> tier1 = new ArrayList<>(List.of(
 			// strncpy needs explicit null-termination: buf[sizeof(buf) – 1] = '\0'
-			"strncpy", "wcsncpy", "_tcsncpy", "_mbsncpy", "_mbsnbcpy", "StrCpyN", "StrCpyNA",
-			"StrCpyNW", "StrNCpy", "strcpynA", "StrNCpyA", "StrNCpyW", "lstrcpyn", "lstrcpynA",
-			"lstrcpynW", "_csncpy", "wcscpyn",
+			"strncpy", "wcsncpy", "_tcsncpy", "_mbsncpy", "_mbsnbcpy", 
+			"StrCpyN", "StrCpyNA", "StrCpyNW", "StrNCpy", "strcpynA", "StrNCpyA", "StrNCpyW", 
+			"lstrcpyn", "lstrcpynA", "lstrcpynW", "_csncpy", "wcscpyn",
 			// strncat must be called with: sizeof(buf) - strlen(buf) - 1 to prevent off-by-one bugs (beware of underflow)
-			"strncat", "wcsncat", "_tcsncat", "_mbsncat", "_mbsnbcat", "StrCatN", "StrCatNA",
-			"StrCatNW", "StrNCat", "StrNCatA", "StrNCatW", "lstrncat", "lstrcatnA", "lstrcatnW",
-			"lstrcatn",
+			"strncat", "wcsncat", "_tcsncat", "_mbsncat", "_mbsnbcat", 
+			"StrCatN", "StrCatNA", "StrCatNW", "StrNCat", "StrNCatA", "StrNCatW", 
+			"lstrncat", "lstrcatnA", "lstrcatnW", "lstrcatn",
 			// strlcpy returns strlen(src), which can be larger than the dst buffer
 			"strlcpy",
 			// strlcat returns strlen(src) + strlen(dst), which can be larger than the dst buffer
@@ -99,17 +105,19 @@ public class Rhabdomancer extends GhidraScript
 			// string token functions can be dangerous as well
 			"strtok", "_tcstok", "wcstok", "_mbstok",
 			// snprintf returns strlen(src), which can be larger than the dst buffer
-			"snprintf", "_sntprintf", "_snprintf", "_snwprintf", "vsnprintf", "_vsnprintf",
-			"_vsnwprintf", "wnsprintf", "wnsprintfA", "wnsprintfW", "_vsntprintf", "wvnsprintf",
-			"wvnsprintfA", "wvnsprintfW",
+			"snprintf", "_sntprintf", "_snprintf", "_snprintf_c89", "_snwprintf", 
+			"vsnprintf", "_vsnprintf", "_vsnprintf_c89",
+			"_vsnwprintf", "wnsprintf", "wnsprintfA", "wnsprintfW", "_vsntprintf", 
+			"wvnsprintf", "wvnsprintfA", "wvnsprintfW",
 			// memory copying functions can be used insecurely, check if size arg can contain negative numbers
-			"memcpy", "memccpy", "memmove", "bcopy", "wmemcpy", "wmemmove", "RtlCopyMemory", "CopyMemory",
+			"memcpy", "memccpy", "memmove", "bcopy", 
+			"wmemcpy", "wmemmove", "RtlCopyMemory", "CopyMemory",
 			// user id and group id functions can be used insecurely, return value must be checked
 			"setuid", "seteuid", "setreuid", "setresuid",
 			"setgid", "setegid", "setregid", "setresgid", "setgroups", "initgroups",
 			// exec* and related functions can be used insecurely
 			// functions without "-e" suffix take the environment from the extern variable environ of calling process
-			"execl", "execlp", "execle", "execv", "execvp", "execvpe",
+			"execl", "execlp", "execle", "execv", "execve", "execvp", "execvpe",
 			"system", "fork", "pipe", "popen",
 			// i/o functions can be used insecurely
 			"open", "openat", "fopen", "freopen", "dlopen",
@@ -142,16 +150,18 @@ public class Rhabdomancer extends GhidraScript
 			// check for temporary file bugs
 			"mkstemp", "tmpfile", "mkdtemp",
 			// check for makepath and splitpath bugs
-			"makepath", "_tmakepath", "_makepath", "_wmakepath", "_splitpath", "_tsplitpath", "_wsplitpath",
+			"makepath", "_tmakepath", "_makepath", "_wmakepath", 
+			"_splitpath", "_tsplitpath", "_wsplitpath",
 			// check for format string bugs (all functions that use va_list args should be checked!)
 			"syslog",
 			// check for locale bugs
 			"setlocale", "catopen"
+			// *printf* functions should be checked for format string bugs
 			// kill, *sig*, *jmp* functions should be checked for signal-handling related vulnerabilities
 			// *sem*, *mutex* functions should be checked for other concurrency-related vulnerabilities
 			// new, new []: potential implicit overflow with scalar constructor
 			// delete, delete []: check for misalignment with constructor 
-			// integer bugs should be also taken into account as they are more subtle and widespread!
+			// integer bugs should be also taken into account as they are more subtle and widespread
 		));
 
 		// function list
