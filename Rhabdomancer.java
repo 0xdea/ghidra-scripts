@@ -152,11 +152,13 @@ public class Rhabdomancer extends GhidraScript
 			// check for makepath and splitpath bugs
 			"makepath", "_tmakepath", "_makepath", "_wmakepath", 
 			"_splitpath", "_tsplitpath", "_wsplitpath",
-			// check for format string bugs (all functions that use va_list args should be checked!)
+			// check for format string bugs
 			"syslog",
+			"printf", "fprintf", "asprintf", "dprintf", 
+			"vprintf", "vfprintf", "vasprintf", "vdprintf", 
+			"_printf_c89", "_fprintf_c89",
 			// check for locale bugs
 			"setlocale", "catopen"
-			// *printf* functions should be checked for format string bugs
 			// kill, *sig*, *jmp* functions should be checked for signal-handling related vulnerabilities
 			// *sem*, *mutex* functions should be checked for other concurrency-related vulnerabilities
 			// new, new []: potential implicit overflow with scalar constructor
