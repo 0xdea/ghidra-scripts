@@ -62,6 +62,7 @@ public class Rhabdomancer extends GhidraScript
 			"strcpy", "strcpyA", "strcpyW", "wcscpy", "_tcscpy", "_mbscpy", 
 			"StrCpy", "StrCpyA", "StrCpyW", 
 			"lstrcpy", "lstrcpyA", "lstrcpyW", "_tccpy", "_mbccpy", "_ftcscpy",
+			"stpcpy",
 			// strcat family
 			"strcat", "strcatA", "strcatW", "wcscat", "_tcscat", "_mbscat", 
 			"StrCat", "StrCatA", "StrCatW", 
@@ -92,6 +93,7 @@ public class Rhabdomancer extends GhidraScript
 			"strncpy", "wcsncpy", "_tcsncpy", "_mbsncpy", "_mbsnbcpy", 
 			"StrCpyN", "StrCpyNA", "StrCpyNW", "StrNCpy", "strcpynA", "StrNCpyA", "StrNCpyW", 
 			"lstrcpyn", "lstrcpynA", "lstrcpynW", "_csncpy", "wcscpyn",
+			"stpncpy",
 			// strncat must be called with: sizeof(buf) - strlen(buf) - 1 to prevent off-by-one bugs (beware of underflow)
 			"strncat", "wcsncat", "_tcsncat", "_mbsncat", "_mbsnbcat", 
 			"StrCatN", "StrCatNA", "StrCatNW", "StrNCat", "StrNCatA", "StrNCatW", 
