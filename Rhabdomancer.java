@@ -76,8 +76,8 @@ public class Rhabdomancer extends GhidraScript
 			"_wsprintfA", "_wsprintfW", "sprintfW", "sprintfA", "wsprintf", "wsprintfW", "wsprintfA", 
 			"swprintf", "_stprintf", "wvsprintf", "wvsprintfA", "wvsprintfW", "_vstprintf",
 			// scanf family
-			"scanf", "wscanf", "_tscanf", "sscanf", "_sscanf_c89", 
-			"fscanf", "fwscanf", "swscanf", "_stscanf",
+			"scanf", "__isoc99_sscanf", "wscanf", "_tscanf", "sscanf", "_sscanf_c89", 
+			"fscanf", "__isoc99_fscanf", "fwscanf", "swscanf", "_stscanf",
 			"snscanf", "_snscanf", "snwscanf", "_snwscanf", "_sntscanf",
 			// gets family
 			"gets", "_getts", "_getws", "_gettws", "getpw",
