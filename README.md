@@ -14,3 +14,6 @@ See also: https://github.com/federicodotta/ghidra-scripts
 
 ## VulnDev
 * **Rhabdomancer.java**. This script locates all calls to potentially insecure functions.
+
+## Analysis
+* **ResolveMipsN32LinuxSyscallsScript**. This script resolves MIPS N32 syscalls.
