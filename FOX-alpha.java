@@ -1,5 +1,5 @@
 /*
- * FOX-alpha - Fix Objective-C XREFs @Ghidra (AARCH64 only)
+ * FOX-alpha.java - Fix Objective-C XREFs @Ghidra (AARCH64)
  * Copyright (c) 2021 Marco Ivaldi <raptor@0xdeadbeef.info>
  *
  * "When it encounters a method call, the compiler generates a call to one of

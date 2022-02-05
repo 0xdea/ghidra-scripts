@@ -1,9 +1,8 @@
 /*
- * ResolveMipsN32LinuxSyscallsScript - Resolve MIPS N32 Syscalls
- * Copyright (c) 2021-2022 Marco Ivaldi <raptor@0xdeadbeef.info>
+ * ResolveMipsN32LinuxSyscallsScript.java - MIPS N32 Linux
+ * Copyright (c) 2022 Marco Ivaldi <raptor@0xdeadbeef.info>
  *
- * "The only intuitive interface is the nipple." 
- * 					-- Anonymous
+ * "The only intuitive interface is the nipple." -- Anonymous
  *
  * ResolveMipsN32LinuxSyscallsScript is a script based on the original
  * ResolveX86orX64LinuxSyscallsScript distributed with Ghidra. It uses
@@ -13,7 +12,7 @@
  * https://github.com/NationalSecurityAgency/ghidra/blob/master/GhidraDocs/
  *
  * This script can assist in analyzing static binaries. It was tested with
- * Ghidra 10.1.1 on an ELF 32-bit MSB executable, MIPS, N32 MIPS64 rel2
+ * Ghidra v10.1.1 on an ELF 32-bit MSB executable, MIPS, N32 MIPS64 rel2
  * version 1 (SYSV), statically linked, stripped Linux binary (Cavium
  * Octeon III processor). Porting to other architectures should be trivial.
  *

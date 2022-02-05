@@ -1,6 +1,6 @@
 /*
- * Rhabdomancer - A Ghidra vulnerability research assistant
- * Copyright (c) 2021 Marco Ivaldi <raptor@0xdeadbeef.info>
+ * Rhabdomancer.java - A Ghidra vulnerability research assistant
+ * Copyright (c) 2021-2022 Marco Ivaldi <raptor@0xdeadbeef.info>
  *
  * "For the king of Babylon stands at the parting of the way, at the head of
  * the two ways, to use divination. He shakes the arrows; he consults the
