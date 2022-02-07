@@ -120,7 +120,7 @@ public class Rhabdomancer extends GhidraScript
 			// exec* and related functions can be used insecurely
 			// functions without "-e" suffix take the environment from the extern variable environ of calling process
 			"execl", "execlp", "execle", "execv", "execve", "execvp", "execvpe",
-			"system", "fork", "pipe", "popen",
+			"system", "fork", "vfork", "clone", "pipe", "popen",
 			// i/o functions can be used insecurely
 			"open", "open64", "openat", "openat64", "fopen", "fopen64", "freopen", "freopen64", "dlopen",
 			"read", "fread", // check read from unreadable paths/files and from writable paths/files
