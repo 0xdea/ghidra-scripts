@@ -137,7 +137,7 @@ public class Rhabdomancer extends GhidraScript
 			"getopt", "getopt_long",
 			// check for insecure use of memory allocation functions
 			// check if size arg can contain negative numbers or zero, return value must be checked
-			"malloc", 
+			"malloc", "xmalloc",
 			"calloc", // potential implicit overflow due to integer wrapping
 			"realloc", // doesn't initialize memory to zero; realloc(0) is equivalent to free
 			"free", // check for incorrect use, double free, use after free
