@@ -83,6 +83,8 @@ public class Rhabdomancer extends GhidraScript
 			"gets", "_getts", "_getws", "_gettws", "getpw",
 			// insecure memory allocation on the stack, can also cause stack clash
 			"alloca", "_alloca",
+			// command execution via shell
+			"system", "popen",
 			// insecure temporary file creation
 			"mktemp", "tmpnam", "tempnam"
 		));
@@ -120,7 +122,7 @@ public class Rhabdomancer extends GhidraScript
 			// exec* and related functions can be used insecurely
 			// functions without "-e" suffix take the environment from the extern variable environ of calling process
 			"execl", "execlp", "execle", "execv", "execve", "execvp", "execvpe",
-			"system", "fork", "vfork", "clone", "pipe", "popen",
+			"fork", "vfork", "clone", "pipe",
 			// i/o functions can be used insecurely
 			"open", "open64", "openat", "openat64", "fopen", "fopen64", "freopen", "freopen64", "dlopen", "connect",
 			"read", "fread", // check read from unreadable paths/files and from writable paths/files
