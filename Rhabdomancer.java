@@ -59,32 +59,34 @@ public class Rhabdomancer extends GhidraScript
 		// see also https://github.com/x509cert/banned/blob/master/banned.h
 		List<String> tier0 = new ArrayList<>(List.of(
 			// strcpy family
-			"strcpy", "strcpyA", "strcpyW", "wcscpy", "_tcscpy", "_mbscpy", 
+			"strcpy", "_strcpy", "strcpyA", "strcpyW", "wcscpy", "_wcscpy", "_tcscpy", "mbscpy", "_mbscpy", 
 			"StrCpy", "StrCpyA", "StrCpyW", 
 			"lstrcpy", "lstrcpyA", "lstrcpyW", "_tccpy", "_mbccpy", "_ftcscpy",
 			"stpcpy",
 			// strcat family
-			"strcat", "strcatA", "strcatW", "wcscat", "_tcscat", "_mbscat", 
+			"strcat", "_strcat", "strcatA", "strcatW", "wcscat", "_wcscat", "_tcscat", "mbscat", "_mbscat", 
 			"StrCat", "StrCatA", "StrCatW", 
-			"lstrcat", "lstrcatA", "lstrcatW", 
+			"lstrcat", "_lstrcat", "lstrcatA", "_lstrcatA", "lstrcatW", "_lstrcatW", 
 			"StrCatBuff", "StrCatBuffA", "StrCatBuffW", "StrCatChainW", 
 			"_tccat", "_mbccat", "_ftcscat",
 			// sprintf family
 			"sprintf", "_sprintf", "_sprintf_c89", 
 			"vsprintf", "_vsprintf", "_vsprintf_c89", 
-			"swprintf", "vswprintf",
-			"_wsprintfA", "_wsprintfW", "sprintfW", "sprintfA", "wsprintf", "wsprintfW", "wsprintfA", 
-			"swprintf", "_stprintf", "wvsprintf", "wvsprintfA", "wvsprintfW", "_vstprintf",
+			"swprintf", "_swprintf", "vswprintf", "_vswprintf",
+			"_wsprintfA", "_wsprintfW", "sprintfW", "sprintfA", 
+			"wsprintf", "_wsprintf", "wsprintfW", "_wsprintfW", "wsprintfA", "_wsprintfA",
+			"_stprintf", "wvsprintf", "wvsprintfA", "wvsprintfW", "_vstprintf",
 			// scanf family
-			"scanf", "__isoc99_sscanf", "wscanf", "_tscanf", "sscanf", "_sscanf_c89", 
-			"fscanf", "__isoc99_fscanf", "fwscanf", "swscanf", "_stscanf",
-			"snscanf", "_snscanf", "snwscanf", "_snwscanf", "_sntscanf",
+			"scanf", "_scanf", "__isoc99_sscanf", "wscanf", "_tscanf", "sscanf", "_sscanf", "_sscanf_c89", 
+			"fscanf", "_fscanf", "__isoc99_fscanf", "vfscanf", "_vfscanf", "fwscanf", "swscanf", "_stscanf",
+			"snscanf", "_snscanf", "snwscanf", "_snwscanf", "_sntscanf", "vsscanf", "_vsscanf",
+			"vscanf", "_vscanf", "vfwscanf", "_vfwscanf", "vswscanf", "_vswscanf", "vwscanf", "_vwscanf",
 			// gets family
-			"gets", "_getts", "_getws", "_gettws", "getpw",
+			"gets", "_gets", "_getts", "_getws", "_gettws", "getpw",
 			// insecure memory allocation on the stack, can also cause stack clash
 			"alloca", "_alloca",
 			// command execution via shell
-			"system", "popen",
+			"system", "_system", "popen", "_popen", "wpopen", "_wpopen",
 			// insecure temporary file creation
 			"mktemp", "tmpnam", "tempnam"
 		));
@@ -92,12 +94,12 @@ public class Rhabdomancer extends GhidraScript
 		// these functions are interesting and should be checked for insecure use cases
 		List<String> tier1 = new ArrayList<>(List.of(
 			// strncpy needs explicit null-termination: buf[sizeof(buf) – 1] = '\0'
-			"strncpy", "wcsncpy", "_tcsncpy", "_mbsncpy", "_mbsnbcpy", 
+			"strncpy", "_strncpy", "wcsncpy", "_tcsncpy", "_mbsncpy", "_mbsnbcpy", 
 			"StrCpyN", "StrCpyNA", "StrCpyNW", "StrNCpy", "strcpynA", "StrNCpyA", "StrNCpyW", 
 			"lstrcpyn", "lstrcpynA", "lstrcpynW", "_csncpy", "wcscpyn",
 			"stpncpy",
 			// strncat must be called with: sizeof(buf) - strlen(buf) - 1 to prevent off-by-one bugs (beware of underflow)
-			"strncat", "wcsncat", "_tcsncat", "_mbsncat", "_mbsnbcat", 
+			"strncat", "_strncat", "wcsncat", "_tcsncat", "_mbsncat", "_mbsnbcat", 
 			"StrCatN", "StrCatNA", "StrCatNW", "StrNCat", "StrNCatA", "StrNCatW", 
 			"lstrncat", "lstrcatnA", "lstrcatnW", "lstrcatn",
 			// strlcpy returns strlen(src), which can be larger than the dst buffer
@@ -111,17 +113,18 @@ public class Rhabdomancer extends GhidraScript
 			// snprintf returns strlen(src), which can be larger than the dst buffer
 			"snprintf", "_sntprintf", "_snprintf", "_snprintf_c89", "_snwprintf", 
 			"vsnprintf", "_vsnprintf", "_vsnprintf_c89",
-			"_vsnwprintf", "wnsprintf", "wnsprintfA", "wnsprintfW", "_vsntprintf", 
+			"vsnwprintf", "_vsnwprintf", "wnsprintf", "wnsprintfA", "wnsprintfW", "_vsntprintf", 
 			"wvnsprintf", "wvnsprintfA", "wvnsprintfW",
 			// memory copying functions can be used insecurely, check if size arg can contain negative numbers
-			"memcpy", "memccpy", "memmove", "bcopy", 
-			"wmemcpy", "wmemmove", "RtlCopyMemory", "CopyMemory",
+			"memcpy", "_memcpy", "memccpy", "memmove", "_memmove", "bcopy",
+			"wmemcpy", "_wmemcpy", "wmemmove", "_wmemmove", "RtlCopyMemory", "CopyMemory",
 			// user id and group id functions can be used insecurely, return value must be checked
 			"setuid", "seteuid", "setreuid", "setresuid",
 			"setgid", "setegid", "setregid", "setresgid", "setgroups", "initgroups",
 			// exec* and related functions can be used insecurely
 			// functions without "-e" suffix take the environment from the extern variable environ of calling process
 			"execl", "execlp", "execle", "execv", "execve", "execvp", "execvpe",
+			"_execl", "_execlp", "_execle", "_execv", "_execve", "_execvp", "_execvpe",
 			"fork", "vfork", "clone", "pipe",
 			// i/o functions can be used insecurely
 			"open", "open64", "openat", "openat64", "fopen", "fopen64", "freopen", "freopen64", "dlopen", "connect",
@@ -142,7 +145,7 @@ public class Rhabdomancer extends GhidraScript
 			"malloc", "xmalloc",
 			"calloc", // potential implicit overflow due to integer wrapping
 			"realloc", "xrealloc", // doesn't initialize memory to zero; realloc(0) is equivalent to free
-			"free", // check for incorrect use, double free, use after free
+			"free", "_free", // check for incorrect use, double free, use after free
 			// check for file access bugs
 			"mkdir", "creat",
 			"link", "linkat", "symlink", "symlinkat", "readlink", "readlinkat", "unlink", "unlinkat",
@@ -157,9 +160,13 @@ public class Rhabdomancer extends GhidraScript
 			"makepath", "_tmakepath", "_makepath", "_wmakepath", 
 			"_splitpath", "_tsplitpath", "_wsplitpath",
 			// check for format string bugs
-			"syslog",
-			"printf", "fprintf", "asprintf", "dprintf", 
-			"vprintf", "vfprintf", "vasprintf", "vdprintf", 
+			"syslog", "NSLog",
+			"printf", "fprintf", "wprintf", "fwprintf", "asprintf", "dprintf", "printk",
+			"vprintf", "vfprintf", "vasprintf", "vdprintf", "vfwprintf", 
+			"vcprintf", "vcwprintf", "vscprintf", "vscwprintf", "vwprintf",
+			"_printf", "_fprintf", "_wprintf", "_fwprintf", "_asprintf", "_dprintf", "_printk",
+			"_vprintf", "_vfprintf", "_vasprintf", "_vdprintf", "_vfwprintf", 
+			"_vcprintf", "_vcwprintf", "_vscprintf", "_vscwprintf", "_vwprintf",
 			"_printf_c89", "_fprintf_c89",
 			// check for locale bugs
 			"setlocale", "catopen"
