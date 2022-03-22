@@ -72,7 +72,6 @@ public class Rhabdomancer extends GhidraScript
 			// sprintf family
 			"sprintf", "_sprintf", "_sprintf_c89", 
 			"vsprintf", "_vsprintf", "_vsprintf_c89", 
-			"swprintf", "_swprintf", "vswprintf", "_vswprintf",
 			"_wsprintfA", "_wsprintfW", "sprintfW", "sprintfA", 
 			"wsprintf", "_wsprintf", "wsprintfW", "_wsprintfW", "wsprintfA", "_wsprintfA",
 			"_stprintf", "wvsprintf", "wvsprintfA", "wvsprintfW", "_vstprintf",
@@ -115,6 +114,7 @@ public class Rhabdomancer extends GhidraScript
 			"vsnprintf", "_vsnprintf", "_vsnprintf_c89",
 			"vsnwprintf", "_vsnwprintf", "wnsprintf", "wnsprintfA", "wnsprintfW", "_vsntprintf", 
 			"wvnsprintf", "wvnsprintfA", "wvnsprintfW",
+			"swprintf", "_swprintf", "vswprintf", "_vswprintf",
 			// memory copying functions can be used insecurely, check if size arg can contain negative numbers
 			"memcpy", "_memcpy", "memccpy", "memmove", "_memmove", "bcopy",
 			"wmemcpy", "_wmemcpy", "wmemmove", "_wmemmove", "RtlCopyMemory", "CopyMemory",
