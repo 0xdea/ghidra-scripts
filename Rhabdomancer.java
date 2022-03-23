@@ -62,7 +62,7 @@ public class Rhabdomancer extends GhidraScript
 			"strcpy", "_strcpy", "strcpyA", "strcpyW", "wcscpy", "_wcscpy", "_tcscpy", "mbscpy", "_mbscpy", 
 			"StrCpy", "StrCpyA", "StrCpyW", 
 			"lstrcpy", "lstrcpyA", "lstrcpyW", "_tccpy", "_mbccpy", "_ftcscpy",
-			"stpcpy",
+			"stpcpy", "wcpcpy",
 			// strcat family
 			"strcat", "_strcat", "strcatA", "strcatW", "wcscat", "_wcscat", "_tcscat", "mbscat", "_mbscat", 
 			"StrCat", "StrCatA", "StrCatW", 
@@ -96,15 +96,15 @@ public class Rhabdomancer extends GhidraScript
 			"strncpy", "_strncpy", "wcsncpy", "_tcsncpy", "_mbsncpy", "_mbsnbcpy", 
 			"StrCpyN", "StrCpyNA", "StrCpyNW", "StrNCpy", "strcpynA", "StrNCpyA", "StrNCpyW", 
 			"lstrcpyn", "lstrcpynA", "lstrcpynW", "_csncpy", "wcscpyn",
-			"stpncpy",
+			"stpncpy", "wcpncpy",
 			// strncat must be called with: sizeof(buf) - strlen(buf) - 1 to prevent off-by-one bugs (beware of underflow)
 			"strncat", "_strncat", "wcsncat", "_tcsncat", "_mbsncat", "_mbsnbcat", 
 			"StrCatN", "StrCatNA", "StrCatNW", "StrNCat", "StrNCatA", "StrNCatW", 
 			"lstrncat", "lstrcatnA", "lstrcatnW", "lstrcatn",
 			// strlcpy returns strlen(src), which can be larger than the dst buffer
-			"strlcpy",
+			"strlcpy", "wcslcpy",
 			// strlcat returns strlen(src) + strlen(dst), which can be larger than the dst buffer
-			"strlcat",
+			"strlcat", "wcslcat",
 			// strlen can be dangerous with short integers (and potentially also with signed int)
 			"strlen", "lstrlen",
 			// string token functions can be dangerous as well
