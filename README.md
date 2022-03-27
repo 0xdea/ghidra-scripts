@@ -10,10 +10,10 @@ A collection of my Ghidra scripts to facilitate reverse engineering and vulnerab
 See also: https://github.com/federicodotta/ghidra-scripts
 
 ## Analysis
-* **ResolveMipsN32LinuxSyscallsScript**. This script resolves MIPS N32 syscalls.
+* [**ResolveMipsN32LinuxSyscallsScript**](https://github.com/0xdea/ghidra-scripts/blob/main/ResolveMipsN32LinuxSyscallsScript.java). This script resolves MIPS N32 syscalls.
 
 ## iOS
-* **FOX-alpha.java**. This script tries to fix Objective-C cross-references in iOS apps.
+* [**FOX-alpha.java**](https://github.com/0xdea/ghidra-scripts/blob/main/FOX-alpha.java). This script tries to fix Objective-C cross-references in iOS apps.
 
 ## VulnDev
-* **Rhabdomancer.java**. This script locates all calls to potentially insecure functions.
+* [**Rhabdomancer.java**](https://github.com/0xdea/ghidra-scripts/blob/main/Rhabdomancer.java). This script locates all calls to potentially insecure functions.
