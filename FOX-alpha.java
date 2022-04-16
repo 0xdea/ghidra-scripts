@@ -85,7 +85,7 @@ public class FOX-alpha extends GhidraScript
 		// function list
 		List<Function> functions = new ArrayList<>();
 
-		printf("\nFOX-alpha - Fix Objective-C XREFs @Ghidra (AARCH64 only)\n");
+		printf("\nFOX-alpha.java - Fix Objective-C XREFs @Ghidra (AARCH64)\n");
 		printf("Copyright (c) 2021 Marco Ivaldi <raptor@0xdeadbeef.info>\n\n");
 		printf("Attempting to fix Objective-C XREFs...\n\n");
 
@@ -169,7 +169,7 @@ public class FOX-alpha extends GhidraScript
 			methods.forEach(m -> addXrefWithClass(m, addr, className));
 		}
 
-		/* if no reference was added, add a plate comment to all matching methods instead */
+		// if no reference was added, add a plate comment to all matching methods instead
 		if (getReferencesFrom(addr).length < 2) {
 			methods.forEach(m -> addComment(m, addr, name));
 		}
