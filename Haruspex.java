@@ -61,6 +61,7 @@ public class Haruspex extends GhidraScript
 		printf("\nHaruspex.java - Extract Ghidra decompiler's pseudo-code\n");
 		printf("Copyright (c) 2022 Marco Ivaldi <raptor@0xdeadbeef.info>\n\n");
 		
+		// ask for output directory path
 		try {
 			outputPath = askString("Please enter the path of the output directory", "Path:");
 		} catch (Exception e) {
@@ -112,7 +113,6 @@ public class Haruspex extends GhidraScript
 		try {
 			FileWriter fw = new FileWriter(path + "/" + name);
 			PrintWriter pw = new PrintWriter(fw);
-
 			pw.write(output);
 			pw.close();
 
