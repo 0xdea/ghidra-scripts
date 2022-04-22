@@ -63,7 +63,7 @@ public class Haruspex extends GhidraScript
 		
 		// ask for output directory path
 		try {
-			outputPath = askString("Please enter the path of the output directory", "Path:");
+			outputPath = askString("Output directory path", "Enter the path of the output directory:");
 		} catch (Exception e) {
 			printf("Output directory not supplied, using default \"%s\".\n", outputPath);
 		}
