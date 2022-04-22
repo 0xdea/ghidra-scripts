@@ -25,7 +25,7 @@
  * - Auto analyze your target binary with the default analyzers (at least)
  * - Copy the script into your ghidra_scripts directory
  * - Open the Script Manager in Ghidra and run the script
- * - You can also run it via the Tools > Rhabdomancer menu or the shurtcut "Y"
+ * - You can also run it via the Tools > Rhabdomancer menu or the shortcut "Y"
  * - Open Window > Comments and navigate [BAD] candidate points in tier 0-2
  *
  * Inspired by The Ghidra Book (No Starch, 2020). Tested with Ghidra v10.1.1.
