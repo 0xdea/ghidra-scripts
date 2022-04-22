@@ -22,7 +22,7 @@
  * - Analyze your target binary and manually add/modify functions if needed
  * - Copy the script into your ghidra_scripts directory
  * - Open the Script Manager in Ghidra and run the script
- * - You can also run it via the Tools > Haruspex menu or the shurtcut "H"
+ * - You can also run it via the Tools > Haruspex menu or the shortcut "H"
  * - Enter an output path in which the pseudo-code will be saved
  *
  * Tested with Ghidra v10.1.1.
