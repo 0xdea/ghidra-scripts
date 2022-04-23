@@ -101,7 +101,7 @@ public class Haruspex extends GhidraScript
 	public void extractPseudoCode(Function func)
 	{
 		DecompileResults res = decomp.decompileFunction(func, TIMEOUT, monitor);
-		saveToFile(outputPath, func.getName() + ".c", res.getDecompiledFunction().getC());
+		saveToFile(outputPath, func.getName() + "@" + func.getEntryPoint() + ".c", res.getDecompiledFunction().getC());
 	}
 
 	// save results to file
