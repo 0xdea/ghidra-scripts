@@ -81,13 +81,15 @@ public class Rhabdomancer extends GhidraScript
 			"snscanf", "_snscanf", "snwscanf", "_snwscanf", "_sntscanf", "vsscanf", "_vsscanf",
 			"vscanf", "_vscanf", "vfwscanf", "_vfwscanf", "vswscanf", "_vswscanf", "vwscanf", "_vwscanf",
 			// gets family
-			"gets", "_gets", "_getts", "_getws", "_gettws", "getpw",
+			"gets", "_gets", "_getts", "_getws", "_gettws", "getpw", "getpass", "getc", "getchar",
 			// insecure memory allocation on the stack, can also cause stack clash
 			"alloca", "_alloca",
 			// command execution via shell
 			"system", "_system", "popen", "_popen", "wpopen", "_wpopen",
 			// insecure temporary file creation
-			"mktemp", "tmpnam", "tempnam"
+			"mktemp", "tmpnam", "tempnam",
+			// insecure pseudo-random number generator
+			"rand", "rand_r", "srand"
 		));
 
 		// these functions are interesting and should be checked for insecure use cases
@@ -154,6 +156,7 @@ public class Rhabdomancer extends GhidraScript
 			"chown", "lchown", "fchown", "fchownat",
 			"chmod", "fchmod", "fchmodat",
 			"access", "faccessat",
+			"getwd", "getcwd",
 			// check for temporary file bugs
 			"mkstemp", "mkstemp64", "tmpfile", "mkdtemp",
 			// check for makepath and splitpath bugs
