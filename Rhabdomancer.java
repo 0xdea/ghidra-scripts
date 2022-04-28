@@ -108,7 +108,7 @@ public class Rhabdomancer extends GhidraScript
 			// strlcat returns strlen(src) + strlen(dst), which can be larger than the dst buffer
 			"strlcat", "wcslcat",
 			// strlen can be dangerous with short integers (and potentially also with signed int)
-			"strlen", "lstrlen",
+			"strlen", "lstrlen", "strnlen", "wcslen", "wcsnlen",
 			// string token functions can be dangerous as well
 			"strtok", "_tcstok", "wcstok", "_mbstok",
 			// snprintf returns strlen(src), which can be larger than the dst buffer
