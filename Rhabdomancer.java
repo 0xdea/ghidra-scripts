@@ -146,7 +146,8 @@ public class Rhabdomancer extends GhidraScript
 			// check if size arg can contain negative numbers or zero, return value must be checked
 			"malloc", "xmalloc",
 			"calloc", // potential implicit overflow due to integer wrapping
-			"realloc", "xrealloc", // doesn't initialize memory to zero; realloc(0) is equivalent to free
+			"realloc", "xrealloc", "reallocf", // doesn't initialize memory to zero; realloc(0) is equivalent to free
+			"valloc", "pvalloc", "memalign", "aligned_alloc", 
 			"free", "_free", // check for incorrect use, double free, use after free
 			// check for file access bugs
 			"mkdir", "creat",
