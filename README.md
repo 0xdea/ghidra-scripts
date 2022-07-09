@@ -7,6 +7,8 @@
 
 A collection of my Ghidra scripts to facilitate reverse engineering and vulnerability research.
 
+Blog post: https://security.humanativaspa.it/automating-binary-vulnerability-discovery-with-ghidra-and-semgrep/
+
 See also: https://github.com/federicodotta/ghidra-scripts
 
 ## VulnDev
