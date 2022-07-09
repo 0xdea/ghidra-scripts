@@ -5,6 +5,10 @@
 [![](https://img.shields.io/badge/license-MIT%20License-red.svg?color=lightgray)](https://opensource.org/licenses/MIT) 
 [![](https://img.shields.io/badge/twitter-%400xdea-blue.svg)](https://twitter.com/0xdea)
 
+> “Some details are more important than others.”
+>
+> -- Fedor G. Pikus
+
 A collection of my Ghidra scripts to facilitate reverse engineering and vulnerability research.
 
 Blog post: https://security.humanativaspa.it/automating-binary-vulnerability-discovery-with-ghidra-and-semgrep/
