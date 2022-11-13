@@ -12,7 +12,7 @@
  * https://github.com/NationalSecurityAgency/ghidra/blob/master/GhidraDocs/
  *
  * This script can assist in analyzing static binaries. It was tested with
- * Ghidra v10.1.1 on an ELF 32-bit MSB executable, MIPS, N32 MIPS64 rel2
+ * Ghidra v10.2.1 on an ELF 32-bit MSB executable, MIPS, N32 MIPS64 rel2
  * version 1 (SYSV), statically linked, stripped Linux binary (Cavium
  * Octeon III processor). Porting to other architectures should be trivial.
  *
@@ -42,8 +42,8 @@ import ghidra.app.util.opinion.ElfLoader;
 import ghidra.framework.Application;
 import ghidra.program.model.address.*;
 import ghidra.program.model.data.DataTypeManager;
-import ghidra.program.model.lang.BasicCompilerSpec;
 import ghidra.program.model.lang.Register;
+import ghidra.program.model.lang.SpaceNames;
 import ghidra.program.model.listing.*;
 import ghidra.program.model.mem.MemoryAccessException;
 import ghidra.program.model.pcode.PcodeOp;
@@ -117,7 +117,7 @@ public class ResolveMipsN32LinuxSyscallsScript extends GhidraScript {
 				return;
 			}
 			Address startAddr = currentProgram.getAddressFactory().getAddressSpace(
-				BasicCompilerSpec.OTHER_SPACE_NAME).getAddress(0x0L);
+				SpaceNames.OTHER_SPACE_NAME).getAddress(0x0L);
 			AddUninitializedMemoryBlockCmd cmd = new AddUninitializedMemoryBlockCmd(
 				SYSCALL_SPACE_NAME, null, this.getClass().getName(), startAddr,
 				SYSCALL_SPACE_LENGTH, true, true, true, false, true);
