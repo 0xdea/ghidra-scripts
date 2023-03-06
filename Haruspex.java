@@ -46,11 +46,13 @@ import ghidra.app.script.GhidraScript;
 import ghidra.program.model.symbol.*;
 import ghidra.program.model.listing.*;
 import ghidra.app.decompiler.DecompInterface;
+import ghidra.app.decompiler.DecompileOptions;
 import ghidra.app.decompiler.DecompileResults;
 
 public class Haruspex extends GhidraScript 
 {
 	List<Function> functions;
+	DecompileOptions options;
 	DecompInterface decomp;
 	String outputPath = "/tmp/haruspex.out";
 	static int TIMEOUT = 60;
@@ -74,6 +76,11 @@ public class Haruspex extends GhidraScript
 
 		// extract pseudo-code of all functions (using default options)
 		decomp = new DecompInterface();
+		options = new DecompileOptions();
+		decomp.setOptions(options);
+		decomp.toggleCCode(true);
+		decomp.toggleSyntaxTree(true);
+		decomp.setSimplificationStyle("decompile");
 		if (!decomp.openProgram(currentProgram)) {
 			printf("Could not initialize the decompiler, exiting.\n\n");
 			return;
@@ -91,7 +98,10 @@ public class Haruspex extends GhidraScript
 		while (si.hasNext()) {
 			Symbol s = si.next();
 			if ( (s.getSymbolType() == SymbolType.FUNCTION) && (!s.isExternal()) ) {
-				functions.add(getFunctionAt(s.getAddress()));
+				Function fun = getFunctionAt(s.getAddress());
+				if (!fun.isThunk()) {
+					functions.add(fun);
+				}
 			}
 		}
 	}
