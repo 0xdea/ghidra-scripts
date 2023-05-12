@@ -1,6 +1,6 @@
 /*
  * Rhabdomancer.java - A Ghidra vulnerability research assistant
- * Copyright (c) 2021-2022 Marco Ivaldi <raptor@0xdeadbeef.info>
+ * Copyright (c) 2021-2023 Marco Ivaldi <raptor@0xdeadbeef.info>
  *
  * "For the king of Babylon stands at the parting of the way, at the head of
  * the two ways, to use divination. He shakes the arrows; he consults the
@@ -28,7 +28,7 @@
  * - You can also run it via the Tools > Rhabdomancer menu or the shortcut "Y"
  * - Open Window > Comments and navigate [BAD] candidate points in tier 0-2
  *
- * Inspired by The Ghidra Book (No Starch, 2020). Tested with Ghidra v10.1.1.
+ * Inspired by The Ghidra Book (No Starch, 2020). Tested with Ghidra v10.3.
  */
 
 // This script locates all calls to potentially insecure functions, in order to

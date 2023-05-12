@@ -269,7 +269,7 @@ public class ResolveMipsN32LinuxSyscallsScript extends GhidraScript {
 		Register syscallReg = program.getLanguage().getRegister(syscallRegister);
 		for (Function func : funcsToCalls.keySet()) {
 			Address start = func.getEntryPoint();
-			ContextEvaluator eval = new ConstantPropagationContextEvaluator(true);
+			ContextEvaluator eval = new ConstantPropagationContextEvaluator(monitor, true);
 			SymbolicPropogator symEval = new SymbolicPropogator(program);
 			symEval.flowConstants(start, func.getBody(), eval, true, tMonitor);
 			for (Address callSite : funcsToCalls.get(func)) {
