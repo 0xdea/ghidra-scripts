@@ -151,7 +151,7 @@ public class Rhabdomancer extends GhidraScript
 			"free", "_free", // check for incorrect use, double free, use after free
 			// check for file access bugs
 			"mkdir", "creat",
-			"link", "linkat", "symlink", "symlinkat", "readlink", "readlinkat", "unlink", "unlinkat",
+			"link", "linkat", "symlink", "symlinkat", "readlink", "readlinkat", "unlink", "unlinkat", "realpath", "PathAppend",
 			"rename", "renameat",
 			"stat", "lstat", "fstat", "fstatat",
 			"chown", "lchown", "fchown", "fchownat",
@@ -172,6 +172,7 @@ public class Rhabdomancer extends GhidraScript
 			"_vprintf", "_vfprintf", "_vasprintf", "_vdprintf", "_vfwprintf", 
 			"_vcprintf", "_vcwprintf", "_vscprintf", "_vscwprintf", "_vwprintf",
 			"_printf_c89", "_fprintf_c89",
+			"err", "errx", "warn", "warnx", "verr", "verrx", "vwarn", "vwarnx",
 			// check for locale bugs
 			"setlocale", "catopen"
 			// kill, *sig*, *jmp* functions should be checked for signal-handling related vulnerabilities
