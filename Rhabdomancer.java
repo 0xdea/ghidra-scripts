@@ -133,7 +133,9 @@ public class Rhabdomancer extends GhidraScript
 			"read", "fread", // check read from unreadable paths/files and from writable paths/files
 			"write", "fwrite", // check write to unwritable paths/files
 			"recv", "recvfrom", // check for null-termination
-			"fgets"
+			"fgets",
+			// kernel copy functions can be used insecurely and cause infoleaks or buffer overflows
+			"copy_from_user", "copy_to_user", "copyin", "copyout"
 		));
 
 		// code paths involving these functions should be carefully checked
