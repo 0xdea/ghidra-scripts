@@ -258,6 +258,9 @@ public class Rhabdomancer extends GhidraScript
 							codeUnit.setComment(CodeUnit.PRE_COMMENT, tag + "\n" + cur);
 						}
 					}
+					if (getBookmarks(callAddr).length == 0) {
+						createBookmark(callAddr, "Insecure function - " + tag, dstName + " is called");
+					}
 				}
 			}
 		}
