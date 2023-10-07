@@ -177,7 +177,7 @@ public class Rhabdomancer extends GhidraScript
 			"err", "errx", "warn", "warnx", "verr", "verrx", "vwarn", "vwarnx",
 			// check for locale bugs
 			"setlocale", "catopen"
-			// kill, *sig*, *jmp* functions should be checked for signal-handling related vulnerabilities
+			// kill, signal/sigaction, *setjmp/*longjmp functions should be checked for signal-handling vulnerabilities
 			// *sem*, *mutex* functions should be checked for other concurrency-related vulnerabilities
 			// new, new []: potential implicit overflow with scalar constructor
 			// delete, delete []: check for misalignment with constructor 
