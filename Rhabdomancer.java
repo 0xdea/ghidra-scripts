@@ -141,7 +141,7 @@ public class Rhabdomancer extends GhidraScript
 		// code paths involving these functions should be carefully checked
 		List<String> tier2 = new ArrayList<>(List.of(
 			// check for insecure use of environment vars
-			"getenv",
+			"getenv", "setenv", "putenv", "unsetenv",
 			// check for insecure use of arguments
 			"getopt", "getopt_long",
 			// check for insecure use of memory allocation functions
