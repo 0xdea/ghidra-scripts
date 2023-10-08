@@ -150,7 +150,8 @@ public class Rhabdomancer extends GhidraScript
 			"calloc", // potential implicit overflow due to integer wrapping
 			"realloc", "xrealloc", "reallocf", // doesn't initialize memory to zero; realloc(0) is equivalent to free
 			"valloc", "pvalloc", "memalign", "aligned_alloc", 
-			"free", "_free", // check for incorrect use, double free, use after free
+			"kmalloc", "kmalloc_array", "kcalloc", "kzalloc", "mallocarray",
+			"free", "_free", "kfree" // check for incorrect use, double free, use after free
 			// check for file access bugs
 			"mkdir", "creat",
 			"link", "linkat", "symlink", "symlinkat", "readlink", "readlinkat", "unlink", "unlinkat", "realpath", "PathAppend",
