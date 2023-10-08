@@ -135,7 +135,7 @@ public class Rhabdomancer extends GhidraScript
 			"recv", "recvfrom", // check for null-termination
 			"fgets",
 			// kernel copy functions can be used insecurely and cause infoleaks or buffer overflows
-			"copy_from_user", "copy_to_user", "copyin", "copyout"
+			"copy_from_user", "copy_to_user", "get_user", "put_user", "copyin", "copyout"
 		));
 
 		// code paths involving these functions should be carefully checked
@@ -159,7 +159,7 @@ public class Rhabdomancer extends GhidraScript
 			"stat", "lstat", "fstat", "fstatat",
 			"chown", "lchown", "fchown", "fchownat",
 			"chmod", "fchmod", "fchmodat",
-			"access", "faccessat",
+			"access", "faccessat", "access_ok",
 			"getwd", "getcwd",
 			// check for temporary file bugs
 			"mkstemp", "mkstemp64", "tmpfile", "mkdtemp",
