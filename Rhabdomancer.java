@@ -95,7 +95,7 @@ public class Rhabdomancer extends GhidraScript
 		// these functions are interesting and should be checked for insecure use cases
 		List<String> tier1 = new ArrayList<>(List.of(
 			// strncpy needs explicit null-termination: buf[sizeof(buf) – 1] = '\0'
-			"strncpy", "_strncpy", "wcsncpy", "_tcsncpy", "_mbsncpy", "_mbsnbcpy", 
+			"strncpy", "_strncpy", "wcsncpy", "_tcsncpy", "_mbsncpy", "_mbsnbcpy",
 			"StrCpyN", "StrCpyNA", "StrCpyNW", "StrNCpy", "strcpynA", "StrNCpyA", "StrNCpyW", 
 			"lstrcpyn", "lstrcpynA", "lstrcpynW", "_csncpy", "wcscpyn",
 			"stpncpy", "wcpncpy",
@@ -151,7 +151,7 @@ public class Rhabdomancer extends GhidraScript
 			"realloc", "xrealloc", "reallocf", // doesn't initialize memory to zero; realloc(0) is equivalent to free
 			"valloc", "pvalloc", "memalign", "aligned_alloc", "vzalloc",
 			"kmalloc", "kmalloc_array", "kcalloc", "kzalloc", "mallocarray",
-			"free", "_free", "kfree" // check for incorrect use, double free, use after free
+			"free", "_free", "kfree", // check for incorrect use, double free, use after free
 			// check for file access bugs
 			"mkdir", "creat",
 			"link", "linkat", "symlink", "symlinkat", "readlink", "readlinkat", "unlink", "unlinkat", "realpath", "PathAppend",
