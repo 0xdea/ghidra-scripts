@@ -1,5 +1,5 @@
 /*
- * FOX-alpha.java - Fix Objective-C XREFs @Ghidra (AARCH64)
+ * FOX_alpha.java - Fix Objective-C XREFs @Ghidra (AARCH64)
  * Copyright (c) 2021 Marco Ivaldi <raptor@0xdeadbeef.info>
  *
  * "When it encounters a method call, the compiler generates a call to one of
@@ -10,7 +10,7 @@
  * sent using objc_msgSendSuper_stret and objc_msgSend_stret." 
  * 					-- Apple Objective-C Documentation
  *
- * FOX-alpha is a simple Ghidra script to assist with reverse engineering of
+ * FOX_alpha is a simple Ghidra script to assist with reverse engineering of
  * iOS apps. It locates all calls to *objc_msgSend* family functions, tries to
  * infer the actual method that gets referenced, and updates cross-references
  * accordingly. If the inferred *objc_msgSend* argument matches more than one
@@ -69,7 +69,7 @@ import ghidra.program.model.lang.*;
 import ghidra.program.model.address.*;
 import ghidra.app.util.DisplayableEol;
 
-public class FOX-alpha extends GhidraScript 
+public class FOX_alpha extends GhidraScript 
 {
 	@Override
 	public void run() throws Exception
@@ -85,7 +85,7 @@ public class FOX-alpha extends GhidraScript
 		// function list
 		List<Function> functions = new ArrayList<>();
 
-		printf("\nFOX-alpha.java - Fix Objective-C XREFs @Ghidra (AARCH64)\n");
+		printf("\nFOX_alpha.java - Fix Objective-C XREFs @Ghidra (AARCH64)\n");
 		printf("Copyright (c) 2021 Marco Ivaldi <raptor@0xdeadbeef.info>\n\n");
 		printf("Attempting to fix Objective-C XREFs...\n\n");
 
