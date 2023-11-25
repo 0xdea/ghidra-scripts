@@ -5,9 +5,9 @@
 [![](https://img.shields.io/badge/twitter-%400xdea-blue.svg)](https://twitter.com/0xdea)
 [![](https://img.shields.io/badge/mastodon-%40raptor-purple.svg)](https://infosec.exchange/@raptor)
 
-> “Some details are more important than others.”
+> "Humans are more suited to recognize food than to keep large graphs in their head."
 >
-> -- Fedor G. Pikus
+> -- Halvar Flake
 
 A collection of my Ghidra scripts to facilitate reverse engineering and vulnerability research.
 
