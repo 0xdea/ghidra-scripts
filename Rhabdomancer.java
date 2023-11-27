@@ -120,6 +120,7 @@ public class Rhabdomancer extends GhidraScript
 			// memory copying functions can be used insecurely, check if size arg can contain negative numbers
 			"memcpy", "_memcpy", "memccpy", "memmove", "_memmove", "bcopy", "memset",
 			"wmemcpy", "_wmemcpy", "wmemmove", "_wmemmove", "RtlCopyMemory", "CopyMemory",
+			"memcpy_s", "wmemcpy_s", "memmove_s", "wmemmove_s", "memset_s", "memset_explicit",
 			// user id and group id functions can be used insecurely, return value must be checked
 			"setuid", "seteuid", "setreuid", "setresuid",
 			"setgid", "setegid", "setregid", "setresgid", "setgroups", "initgroups",
