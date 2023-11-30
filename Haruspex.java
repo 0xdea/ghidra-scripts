@@ -41,6 +41,8 @@ import java.util.List;
 import java.util.ArrayList;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.io.File;
+import java.io.IOException;
 
 import ghidra.app.script.GhidraScript;
 import ghidra.program.model.symbol.*;
@@ -54,8 +56,9 @@ public class Haruspex extends GhidraScript
 	List<Function> functions;
 	DecompileOptions options;
 	DecompInterface decomp;
-	String outputPath = "/tmp/haruspex.out";
+	String outputPath;
 	static int TIMEOUT = 60;
+	static int BATCHSIZE = 25;  // specify your batch size
 
 	@Override
 	public void run() throws Exception
@@ -66,7 +69,31 @@ public class Haruspex extends GhidraScript
 		// ask for output directory path
 		try {
 			outputPath = askString("Output directory path", "Enter the path of the output directory:");
+
+			// Create the directory if it doesn't exist
+    		File outputDir = new File(outputPath);
+    		if (!outputDir.exists()) {
+        	outputDir.mkdirs();
+    		}
+
+			printf("Output directory \"%s\".\n", outputPath);
+
 		} catch (Exception e) {
+			// default output path based on the OS
+        	if (System.getProperty("os.name").toLowerCase().contains("win")) {
+            // default path for Windows
+            outputPath = "C:\\Temp\\haruspex.out";
+        	} else {
+            // default path for unix
+            outputPath = "/tmp/haruspex.out";
+        	}
+
+			// Create the directory if it doesn't exist
+    		File outputDir = new File(outputPath);
+    		if (!outputDir.exists()) {
+        	outputDir.mkdirs();
+    		}
+
 			printf("Output directory not supplied, using default \"%s\".\n", outputPath);
 		}
 
@@ -86,7 +113,12 @@ public class Haruspex extends GhidraScript
 			return;
 		}
 		printf("Extracting pseudo-code from %d functions...\n\n", functions.size());
-		functions.forEach(f -> extractPseudoCode(f));
+
+		// btch processing for better extraction performance
+        for (int i = 0; i < functions.size(); i += BATCHSIZE) {
+            List<Function> batch = functions.subList(i, Math.min(i + BATCHSIZE, functions.size()));
+            batchExtractPseudoCode(batch);
+        }
 	}
 
 	// collect all Function objects into a global ArrayList
@@ -108,16 +140,17 @@ public class Haruspex extends GhidraScript
 
 	// extract the pseudo-code of a function
 	// @param func target function
-	public void extractPseudoCode(Function func)
-	{
-		DecompileResults res = decomp.decompileFunction(func, TIMEOUT, monitor);
-		if(res.getDecompiledFunction() != null){
-			saveToFile(outputPath, func.getName() + "@" + func.getEntryPoint() + ".c", res.getDecompiledFunction().getC());
-		}
-		else{
-			printf("Can't decompile %s\n\n", func.getName());
-		}
-	}
+    public void batchExtractPseudoCode(List<Function> batch)
+    {
+        for (Function func : batch) {
+            DecompileResults res = decomp.decompileFunction(func, TIMEOUT, monitor);
+            if (res.getDecompiledFunction() != null) {
+                saveToFile(outputPath, func.getName() + "@" + func.getEntryPoint() + ".c", res.getDecompiledFunction().getC());
+            } else {
+                printf("Can't decompile %s\n\n", func.getName());
+            }
+        }
+    }
 
 	// save results to file
 	// @param path name of the output directory
@@ -125,14 +158,15 @@ public class Haruspex extends GhidraScript
 	// @param output content to save to file
 	public void saveToFile(String path, String name, String output)
 	{
+		String fullPath = path + File.separator + name;
 		try {
-			FileWriter fw = new FileWriter(path + "/" + name);
+			FileWriter fw = new FileWriter(fullPath);
 			PrintWriter pw = new PrintWriter(fw);
 			pw.write(output);
 			pw.close();
 
-		} catch (Exception e) {
-			printf("Cannot write to output file \"%s\".\n\n", path + "/" + name);
+		} catch (IOException e) {
+			printf("Error writing to output file \"%s\". %s\n\n", fullPath, e.getMessage());
 			return;
 		}
 	}
