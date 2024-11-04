@@ -1,6 +1,6 @@
 /*
  * Rhabdomancer.java - A Ghidra vulnerability research assistant
- * Copyright (c) 2021-2023 Marco Ivaldi <raptor@0xdeadbeef.info>
+ * Copyright (c) 2021-2024 Marco Ivaldi <raptor@0xdeadbeef.info>
  *
  * "For the king of Babylon stands at the parting of the way, at the head of
  * the two ways, to use divination. He shakes the arrows; he consults the
@@ -28,7 +28,7 @@
  * - You can also run it via the Tools > Rhabdomancer menu or the shortcut "Y"
  * - Open Window > Comments and navigate [BAD] candidate points in tier 0-2
  *
- * Inspired by The Ghidra Book (No Starch, 2020). Tested with Ghidra v10.3.
+ * Inspired by The Ghidra Book (No Starch, 2020). Tested with Ghidra v11.2.
  */
 
 // This script locates all calls to potentially insecure functions, in order to
@@ -194,6 +194,7 @@ public class Rhabdomancer extends GhidraScript
 		printf("Listing calls to potentially insecure functions...\n");
 
 		// populate tier map
+		// TODO: add `[._]?` prefix to all known bad API functions to catch more uses
 		Map<String, List<String>> bad = new LinkedHashMap<>();
 		bad.put("[BAD 0]", tier0);
 		bad.put("[BAD 1]", tier1);
