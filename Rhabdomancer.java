@@ -28,7 +28,7 @@
  * - You can also run it via the Tools > Rhabdomancer menu or the shortcut "Y"
  * - Open Window > Comments and navigate [BAD] candidate points in tier 0-2
  *
- * Inspired by The Ghidra Book (No Starch, 2020). Tested with Ghidra v11.2.
+ * Inspired by The Ghidra Book (No Starch, 2020). Tested with Ghidra v11.2.1.
  */
 
 // This script locates all calls to potentially insecure functions, in order to
