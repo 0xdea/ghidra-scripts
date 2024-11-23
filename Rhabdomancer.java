@@ -26,6 +26,7 @@
  * - Copy the script into your ghidra_scripts directory
  * - Open the Script Manager in Ghidra and run the script
  * - You can also run it via the Tools > Rhabdomancer menu or the shortcut "Y"
+ * - Choose the output directory to save the results
  * - Open Window > Comments and navigate [BAD] candidate points in tier 0-2
  *
  * Inspired by The Ghidra Book (No Starch, 2020). Tested with Ghidra v11.2.1.
@@ -44,6 +45,10 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.LinkedHashMap;
 import java.util.Iterator;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
+import java.io.IOException;
 
 import ghidra.app.script.GhidraScript;
 import ghidra.program.model.symbol.*;
@@ -52,6 +57,8 @@ import ghidra.program.model.address.*;
 
 public class Rhabdomancer extends GhidraScript 
 {
+	private BufferedWriter outputFile;
+
 	@Override
 	public void run() throws Exception
 	{
@@ -200,6 +207,13 @@ public class Rhabdomancer extends GhidraScript
 		bad.put("[BAD 1]", tier1);
 		bad.put("[BAD 2]", tier2);
 
+		// Create a new file to store function names containing insecure API calls
+		String outputDirectory = askString("Choose Output Directory", "Select the directory to save the results");
+      	File outputFilePath = new File(outputDirectory);
+		try {
+        outputFile = new BufferedWriter(new FileWriter(outputFilePath));
+		printf("Writing results to: %s\n", outputFilePath);
+		
 		// enumerate candidate points at each tier
 		Iterator<Map.Entry<String, List<String>>> i = bad.entrySet().iterator();
 		while (i.hasNext()) {
@@ -209,6 +223,11 @@ public class Rhabdomancer extends GhidraScript
 			entry.getValue().forEach(s -> getFunctions(s, funcs));
 			funcs.forEach(f -> listCalls(f, entry.getKey() + " " + f.getName()));
 		}
+	}
+		catch (IOException e) {
+   		e.printStackTrace();
+	}
+		outputFile.close();
 	}
 
 	// collect Function objects associated with the specified name
@@ -264,6 +283,13 @@ public class Rhabdomancer extends GhidraScript
 					if (getBookmarks(callAddr).length == 0) {
 						createBookmark(callAddr, "Insecure function - " + tag, dstName + " is called");
 					}
+
+					try {
+                        outputFile.write(srcName + "\n");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
 				}
 			}
 		}
