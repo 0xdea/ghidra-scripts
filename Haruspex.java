@@ -1,5 +1,5 @@
 /*
- * Haruspex.java - Extract pseudo-code from Ghidra's decompiler 
+ * Haruspex.java - Extract pseudocode from Ghidra's decompiler
  * Copyright (c) 2022-2024 Marco Ivaldi <raptor@0xdeadbeef.info>
  *
  * "Et immolantem haruspex Spurinna monuit, caveret periculum, quod non
@@ -60,8 +60,8 @@ public class Haruspex extends GhidraScript
 	@Override
 	public void run() throws Exception
 	{
-		printf("\nHaruspex.java - Extract Ghidra decompiler's pseudo-code\n");
-		printf("Copyright (c) 2022 Marco Ivaldi <raptor@0xdeadbeef.info>\n\n");
+		printf("\nHaruspex.java - Extract pseudocode from Ghidra's decompiler\n");
+		printf("Copyright (c) 2022-2024 Marco Ivaldi <raptor@0xdeadbeef.info>\n\n");
 		
 		// ask for output directory path
 		try {

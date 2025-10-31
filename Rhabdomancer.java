@@ -1,6 +1,6 @@
 /*
  * Rhabdomancer.java - A Ghidra vulnerability research assistant
- * Copyright (c) 2021-2024 Marco Ivaldi <raptor@0xdeadbeef.info>
+ * Copyright (c) 2021-2025 Marco Ivaldi <raptor@0xdeadbeef.info>
  *
  * "For the king of Babylon stands at the parting of the way, at the head of
  * the two ways, to use divination. He shakes the arrows; he consults the
@@ -76,10 +76,13 @@ public class Rhabdomancer extends GhidraScript
 			"wsprintf", "_wsprintf", "wsprintfW", "_wsprintfW", "wsprintfA", "_wsprintfA",
 			"_stprintf", "wvsprintf", "wvsprintfA", "wvsprintfW", "_vstprintf",
 			// scanf family
-			"scanf", "_scanf", "__isoc99_sscanf", "wscanf", "_tscanf", "sscanf", "_sscanf", "_sscanf_c89", 
-			"fscanf", "_fscanf", "__isoc99_fscanf", "vfscanf", "_vfscanf", "fwscanf", "swscanf", "_stscanf",
-			"snscanf", "_snscanf", "snwscanf", "_snwscanf", "_sntscanf", "vsscanf", "_vsscanf",
-			"vscanf", "_vscanf", "vfwscanf", "_vfwscanf", "vswscanf", "_vswscanf", "vwscanf", "_vwscanf",
+    		"scanf", "_scanf", "__isoc99_scanf", "wscanf", "_tscanf",
+    		"sscanf", "_sscanf", "__isoc99_sscanf", "_sscanf_c89", "swscanf", "_stscanf",
+    		"fscanf", "_fscanf", "__isoc99_fscanf", "fwscanf",
+    		"vscanf", "_vscanf", "__isoc99_vscanf", "vwscanf", "_vwscanf",
+    		"vfscanf", "_vfscanf", "__isoc99_vfscanf", "vfwscanf", "_vfwscanf",
+    		"vsscanf", "_vsscanf", "__isoc99_vsscanf", "vswscanf", "_vswscanf",
+    		"snscanf", "_snscanf", "snwscanf", "_snwscanf", "_sntscanf",
 			// gets family
 			"gets", "_gets", "_getts", "_getws", "_gettws", "getpw", "getpass", "getc", "getchar",
 			// insecure memory allocation on the stack, can also cause stack clash
@@ -189,8 +192,8 @@ public class Rhabdomancer extends GhidraScript
 		// function list
 		List<Function> funcs = new ArrayList<>();
 
-		printf("\nRhabdomancer - A Ghidra vulnerability research assistant\n");
-		printf("Copyright (c) 2021 Marco Ivaldi <raptor@0xdeadbeef.info>\n\n");
+		printf("\nRhabdomancer.java - A Ghidra vulnerability research assistant\n");
+		printf("Copyright (c) 2021-2025 Marco Ivaldi <raptor@0xdeadbeef.info>\n\n");
 		printf("Listing calls to potentially insecure functions...\n");
 
 		// populate tier map
