@@ -59,12 +59,12 @@ public class Rhabdomancer extends GhidraScript
 		// see also https://github.com/x509cert/banned/blob/master/banned.h
 		List<String> tier0 = new ArrayList<>(List.of(
 			// strcpy family
-			"strcpy", "_strcpy", "strcpyA", "strcpyW", "wcscpy", "_wcscpy", "_tcscpy", "mbscpy", "_mbscpy", 
+    		"strcpy", "_strcpy", "strcpyA", "strcpyW", "wcscpy", "_wcscpy", "_tcscpy", "_mbscpy",
 			"StrCpy", "StrCpyA", "StrCpyW", 
 			"lstrcpy", "lstrcpyA", "lstrcpyW", "_tccpy", "_mbccpy", "_ftcscpy",
 			"stpcpy", "wcpcpy",
 			// strcat family
-			"strcat", "_strcat", "strcatA", "strcatW", "wcscat", "_wcscat", "_tcscat", "mbscat", "_mbscat", 
+			"strcat", "_strcat", "strcatA", "strcatW", "wcscat", "_wcscat", "_tcscat", "_mbscat",
 			"StrCat", "StrCatA", "StrCatW", 
 			"lstrcat", "_lstrcat", "lstrcatA", "_lstrcatA", "lstrcatW", "_lstrcatW", 
 			"StrCatBuff", "StrCatBuffA", "StrCatBuffW", "StrCatChainW", 
@@ -107,11 +107,11 @@ public class Rhabdomancer extends GhidraScript
 			"StrCatN", "StrCatNA", "StrCatNW", "StrNCat", "StrNCatA", "StrNCatW", 
 			"lstrncat", "lstrcatnA", "lstrcatnW", "lstrcatn",
 			// strlcpy returns strlen(src), which can be larger than the dst buffer
-			"strlcpy", "wcslcpy",
+			"strlcpy", "wcslcpy", "_mbslcpy",
 			// strlcat returns strlen(src) + strlen(dst), which can be larger than the dst buffer
-			"strlcat", "wcslcat",
+			"strlcat", "wcslcat", "_mbslcat",
 			// strlen can be dangerous with short integers (and potentially also with signed int)
-			"strlen", "lstrlen", "strnlen", "wcslen", "wcsnlen",
+			"strlen", "lstrlen", "strnlen", "wcslen", "wcsnlen", "_mbslen", "_mbstrlen", "_mbsnlen", "_mbstrnlen",
 			// string token functions can be dangerous as well
 			"strtok", "_tcstok", "wcstok", "_mbstok",
 			// snprintf returns strlen(src), which can be larger than the dst buffer
