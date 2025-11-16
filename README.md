@@ -36,3 +36,7 @@ A collection of my Ghidra scripts to facilitate reverse engineering and vulnerab
 ### Analysis
 
 * [**ResolveMipsN32LinuxSyscallsScript**](ResolveMipsN32LinuxSyscallsScript.java). This script resolves MIPS N32 syscalls.
+
+## TODO
+
+* Implement headless mode.
