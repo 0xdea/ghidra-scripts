@@ -22,6 +22,10 @@ A collection of my Ghidra scripts to facilitate reverse engineering and vulnerab
 
 * <https://github.com/federicodotta/ghidra-scripts>
 
+## Compatibility
+
+* Tested with Ghidra 11.2.1
+
 ## Scripts
 
 ### VulnDev
