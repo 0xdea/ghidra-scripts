@@ -147,7 +147,7 @@ public class Rhabdomancer extends GhidraScript
 			// check for insecure use of environment vars
 			"getenv", "setenv", "putenv", "unsetenv",
 			// check for insecure use of conf strings
-			"confstr",
+			"confstr", "getlogin_r", "getgroups", "gethostname", "getdomainname",
 			// check for insecure use of arguments
 			"getopt", "getopt_long",
 			// check for insecure use of memory allocation functions
