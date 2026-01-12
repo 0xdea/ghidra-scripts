@@ -1,6 +1,6 @@
 /*
  * Rhabdomancer.java - A Ghidra vulnerability research assistant
- * Copyright (c) 2021-2025 Marco Ivaldi <raptor@0xdeadbeef.info>
+ * Copyright (c) 2021-2026 Marco Ivaldi <raptor@0xdeadbeef.info>
  *
  * "For the king of Babylon stands at the parting of the way, at the head of
  * the two ways, to use divination. He shakes the arrows; he consults the
@@ -137,7 +137,7 @@ public class Rhabdomancer extends GhidraScript
 			"read", "fread", // check read from unreadable paths/files and from writable paths/files
 			"write", "fwrite", // check write to unwritable paths/files
 			"recv", "recvfrom", // check for null-termination
-			"fgets",
+			"fgets", "fgetws",
 			// kernel copy functions can be used insecurely and cause infoleaks or buffer overflows
 			"copy_from_user", "copy_to_user", "get_user", "put_user", "copyin", "copyout"
 		));
@@ -146,6 +146,8 @@ public class Rhabdomancer extends GhidraScript
 		List<String> tier2 = new ArrayList<>(List.of(
 			// check for insecure use of environment vars
 			"getenv", "setenv", "putenv", "unsetenv",
+			// check for insecure use of conf strings
+			"confstr",
 			// check for insecure use of arguments
 			"getopt", "getopt_long",
 			// check for insecure use of memory allocation functions
@@ -193,7 +195,7 @@ public class Rhabdomancer extends GhidraScript
 		List<Function> funcs = new ArrayList<>();
 
 		printf("\nRhabdomancer.java - A Ghidra vulnerability research assistant\n");
-		printf("Copyright (c) 2021-2025 Marco Ivaldi <raptor@0xdeadbeef.info>\n\n");
+		printf("Copyright (c) 2021-2026 Marco Ivaldi <raptor@0xdeadbeef.info>\n\n");
 		printf("Listing calls to potentially insecure functions...\n");
 
 		// populate tier map
