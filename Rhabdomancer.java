@@ -182,6 +182,8 @@ public class Rhabdomancer extends GhidraScript
 			"_vcprintf", "_vcwprintf", "_vscprintf", "_vscwprintf", "_vwprintf",
 			"_printf_c89", "_fprintf_c89",
 			"err", "errx", "warn", "warnx", "verr", "verrx", "vwarn", "vwarnx",
+			// check for internet address manipulation bugs
+    		"inet_ntop", "inet_pton",
 			// check for locale bugs
 			"setlocale", "catopen"
 			// kill, signal/sigaction, *setjmp/*longjmp functions should be checked for signal-handling vulnerabilities
