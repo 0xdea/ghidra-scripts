@@ -167,6 +167,7 @@ public class Rhabdomancer extends GhidraScript
 			"chmod", "fchmod", "fchmodat",
 			"access", "faccessat", "access_ok",
 			"getwd", "getcwd",
+			"ptsname_r",
 			// check for temporary file bugs
 			"mkstemp", "mkstemp64", "tmpfile", "mkdtemp",
 			// check for makepath and splitpath bugs
