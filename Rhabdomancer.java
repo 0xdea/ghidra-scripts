@@ -91,6 +91,8 @@ public class Rhabdomancer extends GhidraScript
 			"system", "_system", "popen", "_popen", "wpopen", "_wpopen",
 			// insecure temporary file creation
 			"mktemp", "tmpnam", "tempnam",
+			// time family
+    		"cftime", "ascftime",
 			// insecure pseudo-random number generator
 			"rand", "rand_r", "srand"
 		));
