@@ -88,7 +88,7 @@ public class Rhabdomancer extends GhidraScript
 			// insecure memory allocation on the stack, can also cause stack clash
 			"alloca", "_alloca",
 			// command execution via shell
-			"system", "_system", "popen", "_popen", "wpopen", "_wpopen",
+			"system", "_system", "popen", "_popen", "wpopen", "_wpopen", "p2open",
 			// insecure temporary file creation
 			"mktemp", "tmpnam", "tempnam",
 			// time family
