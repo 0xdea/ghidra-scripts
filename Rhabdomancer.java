@@ -94,6 +94,8 @@ public class Rhabdomancer extends GhidraScript
 			"mktemp", "tmpnam", "tempnam", "tmpnam_r",
 			// time family
     		"cftime", "ascftime",
+			// utmp family
+    		"utmpname", "utmpxname",
 			// insecure pseudo-random number generators
 			"rand", "rand_r", "srand",
 			"drand48", "erand48", "lrand48", "nrand48", "mrand48", "jrand48", "lcong48", "srand48", "seed48"
