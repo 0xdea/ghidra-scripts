@@ -91,7 +91,7 @@ public class Rhabdomancer extends GhidraScript
 			// command execution via shell
 			"system", "_system", "popen", "_popen", "wpopen", "_wpopen", "p2open",
 			// insecure temporary file creation
-			"mktemp", "tmpnam", "tempnam",
+			"mktemp", "tmpnam", "tempnam", "tmpnam_r",
 			// time family
     		"cftime", "ascftime",
 			// insecure pseudo-random number generators
