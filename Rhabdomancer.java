@@ -136,7 +136,7 @@ public class Rhabdomancer extends GhidraScript
 			"_execl", "_execlp", "_execle", "_execv", "_execve", "_execvp", "_execvpe", "execvP",
 			"fork", "vfork", "clone", "pipe",
 			// i/o functions can be used insecurely
-			"open", "open64", "openat", "openat64", "fopen", "fopen64", "freopen", "freopen64", "dlopen", "connect",
+			"open", "open64", "openat", "openat64", "fopen", "fopen64", "freopen", "freopen64", "fdopen", "dlopen", "connect",
 			"copylist", "dbm_open", "dbminit",
 			"read", "fread", // check read from unreadable paths/files and from writable paths/files
 			"write", "fwrite", // check write to unwritable paths/files
@@ -172,7 +172,7 @@ public class Rhabdomancer extends GhidraScript
 			"access", "faccessat", "access_ok",
 			"getwd", "getcwd", "chroot",
 			"ttyname_r", "ptsname_r",
-			"fattach",
+			"fmemopen", "fattach",
 			// check for temporary file bugs
 			"mkstemp", "mkstemp64", "tmpfile", "mkdtemp",
 			// check for makepath and splitpath bugs
