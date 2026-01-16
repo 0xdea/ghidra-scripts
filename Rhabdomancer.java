@@ -192,7 +192,7 @@ public class Rhabdomancer extends GhidraScript
 			"_vprintf", "_vfprintf", "_vasprintf", "_vdprintf", "_vfwprintf", 
 			"_vcprintf", "_vcwprintf", "_vscprintf", "_vscwprintf", "_vwprintf",
 			"_printf_c89", "_fprintf_c89",
-			"err", "errx", "warn", "warnx", "verr", "verrx", "vwarn", "vwarnx",
+			"err", "errx", "errc", "warn", "warnx", "warnc", "verr", "verrx", "verrc", "vwarn", "vwarnx", "vwarnc",
 			// check for internet address manipulation bugs
     		"inet_ntop", "inet_pton",
 			// check for character conversion bugs
