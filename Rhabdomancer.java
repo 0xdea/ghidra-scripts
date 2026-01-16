@@ -163,7 +163,7 @@ public class Rhabdomancer extends GhidraScript
 			"kmalloc", "kmalloc_array", "kcalloc", "kzalloc", "mallocarray",
 			"free", "_free", "kfree", // check for incorrect use, double free, use after free
 			// check for file access bugs
-			"mkdir", "chdir", "creat",
+			"mkdir", "mkdirat", "mknod", "mknodat", "chdir", "creat",
 			"link", "linkat", "symlink", "symlinkat", "readlink", "readlinkat", "unlink", "unlinkat", "realpath", "PathAppend",
 			"rename", "renameat",
 			"stat", "lstat", "fstat", "fstatat",
