@@ -93,8 +93,9 @@ public class Rhabdomancer extends GhidraScript
 			"mktemp", "tmpnam", "tempnam",
 			// time family
     		"cftime", "ascftime",
-			// insecure pseudo-random number generator
-			"rand", "rand_r", "srand"
+			// insecure pseudo-random number generators
+			"rand", "rand_r", "srand",
+			"drand48", "erand48", "lrand48", "nrand48", "mrand48", "jrand48", "lcong48", "srand48", "seed48"
 		));
 
 		// these functions are interesting and should be checked for insecure use cases
