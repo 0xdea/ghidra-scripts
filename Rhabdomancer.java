@@ -63,6 +63,7 @@ public class Rhabdomancer extends GhidraScript
 			"StrCpy", "StrCpyA", "StrCpyW", 
 			"lstrcpy", "lstrcpyA", "lstrcpyW", "_tccpy", "_mbccpy", "_ftcscpy",
 			"stpcpy", "wcpcpy",
+		    "strccpy", "strecpy", "strcadd", "streadd", "strtrns",
 			// strcat family
 			"strcat", "_strcat", "strcatA", "strcatW", "wcscat", "_wcscat", "_tcscat", "_mbscat",
 			"StrCat", "StrCatA", "StrCatW", 
