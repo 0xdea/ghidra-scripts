@@ -173,7 +173,7 @@ public class Rhabdomancer extends GhidraScript
 			"stat", "lstat", "fstat", "fstatat",
 			"chown", "lchown", "fchown", "fchownat",
 			"chmod", "fchmod", "fchmodat",
-			"access", "faccessat", "access_ok",
+			"access", "faccessat", "faccessat2", "access_ok",
 			"getwd", "getcwd", "chroot",
 			"ttyname_r", "ptsname_r",
 			"fmemopen", "fattach",
