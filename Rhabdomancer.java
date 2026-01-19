@@ -199,7 +199,9 @@ public class Rhabdomancer extends GhidraScript
 			// check for character conversion bugs
     		"mbstowcs", "mbsrtowcs", "mbsnrtowcs", "wcstombs", "wcsrtombs", "wcsnrtombs",
 			// check for locale bugs
-			"setlocale", "catopen"
+			"setlocale", "catopen",
+			// check kernel driver functions and ioctl
+    		"cdev_init"
 			// kill, signal/sigaction, *setjmp/*longjmp functions should be checked for signal-handling vulnerabilities
 			// *sem*, *mutex* functions should be checked for other concurrency-related vulnerabilities
 			// new, new []: potential implicit overflow with scalar constructor
