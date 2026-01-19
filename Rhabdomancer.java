@@ -120,6 +120,7 @@ public class Rhabdomancer extends GhidraScript
 			"strlen", "lstrlen", "strnlen", "wcslen", "wcsnlen", "_mbslen", "_mbstrlen", "_mbsnlen", "_mbstrnlen",
 			// string token functions can be dangerous as well
 			"strtok", "_tcstok", "wcstok", "_mbstok",
+			"strfind", "strrspn", "strtrns",
 			// snprintf returns strlen(src), which can be larger than the dst buffer
 			"snprintf", "_sntprintf", "_snprintf", "_snprintf_c89", "_snwprintf", 
 			"vsnprintf", "_vsnprintf", "_vsnprintf_c89",
