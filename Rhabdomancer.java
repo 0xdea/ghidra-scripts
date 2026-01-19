@@ -196,8 +196,8 @@ public class Rhabdomancer extends GhidraScript
 			"err", "errx", "errc", "warn", "warnx", "warnc", "verr", "verrx", "verrc", "vwarn", "vwarnx", "vwarnc",
 			// check for internet address manipulation bugs
     		"inet_ntop", "inet_pton",
-			// check for character conversion bugs
-    		"mbstowcs", "mbsrtowcs", "mbsnrtowcs", "wcstombs", "wcsrtombs", "wcsnrtombs",
+			// check for string conversion bugs
+    		"mbstowcs", "mbsrtowcs", "mbsnrtowcs", "wcstombs", "wcsrtombs", "wcsnrtombs", "OemToCharW",
 			// check for locale bugs
 			"setlocale", "catopen",
 			// check kernel driver functions and ioctl
