@@ -140,6 +140,9 @@ public class Rhabdomancer extends GhidraScript
 			"_execl", "_execlp", "_execle", "_execv", "_execve", "_execvp", "_execvpe", "execvP",
 			"fork", "vfork", "clone", "pipe",
 			"posix_spawn", "posix_spawnp", "spawn", "spawnv", "_spawnv", "wspawnv", "_wspawnv",
+			"WinExec", "ShellExecute", "ShellExecuteA", "ShellExecuteExA", "ShellExecuteW", "ShellExecuteExW",
+    		"CreateProcess", "CreateProcessA", "CreateProcessW", "CreateProcessAsUserA", "CreateProcessAsUserW",
+    		"CreateProcessWithLogon", "CreateProcessWithLogonW", "CreateProcessWithToken", "CreateProcessWithTokenW",
 			// i/o functions can be used insecurely
 			"open", "open64", "openat", "openat64", "fopen", "fopen64", "freopen", "freopen64", "dlopen", "connect",
 			"copylist", "dbm_open", "dbminit",
@@ -147,6 +150,7 @@ public class Rhabdomancer extends GhidraScript
 			"write", "fwrite", // check write to unwritable paths/files
 			"recv", "recvfrom", // check for null-termination
 			"fgets", "fgetws",
+		    "LoadLibrary", "LoadLibraryA", "LoadLibraryExA", "LoadLibraryW", "LoadLibraryExW",
 			// kernel copy functions can be used insecurely and cause infoleaks or buffer overflows
 			"copy_from_user", "copy_to_user", "get_user", "put_user", "copyin", "copyout"
 		));
@@ -154,9 +158,9 @@ public class Rhabdomancer extends GhidraScript
 		// code paths involving these functions should be carefully checked
 		List<String> tier2 = new ArrayList<>(List.of(
 			// check for insecure use of environment vars
-			"getenv", "setenv", "putenv", "unsetenv",
+			"getenv", "setenv", "putenv", "unsetenv", "g_get_home_dir", "g_get_tmp_dir",
 			// check for insecure use of conf strings
-			"confstr", "getlogin", "getlogin_r", "getgroups", "gethostname", "getdomainname",
+			"confstr", "getlogin", "getlogin_r", "getgroups", "gethostname", "getdomainname", "cuserid",
 			// check for insecure use of arguments
 			"getopt", "getopt_long",
 			// check for insecure use of memory allocation functions
@@ -179,9 +183,11 @@ public class Rhabdomancer extends GhidraScript
 			"ttyname_r", "ptsname_r",
 			"fmemopen", "fattach",
 			"ftw", "nftw",
-    		"umask",
+    		"umask", "ulimit",
+		    "AddAccessAllowedAce",
 			// check for temporary file bugs
 			"mkstemp", "mkstemp64", "tmpfile", "mkdtemp",
+			"GetTempFileName", "GetTempFileNameA", "GetTempFileNameW",
 			// check for makepath and splitpath bugs
 			"makepath", "_tmakepath", "_makepath", "_wmakepath", 
 			"_splitpath", "_tsplitpath", "_wsplitpath",
@@ -198,7 +204,7 @@ public class Rhabdomancer extends GhidraScript
 			// check for internet address manipulation bugs
     		"inet_ntop", "inet_pton",
 			// check for string conversion bugs
-    		"mbstowcs", "mbsrtowcs", "mbsnrtowcs", "wcstombs", "wcsrtombs", "wcsnrtombs", "OemToCharW",
+    		"mbstowcs", "mbsrtowcs", "mbsnrtowcs", "wcstombs", "wcsrtombs", "wcsnrtombs", "OemToCharW", "MultiByteToWideChar",
 			// check for locale bugs
 			"setlocale", "catopen",
 			// check kernel driver functions and ioctl
