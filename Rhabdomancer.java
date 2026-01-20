@@ -139,6 +139,7 @@ public class Rhabdomancer extends GhidraScript
 			"execl", "execlp", "execle", "execv", "execve", "execvp", "execvpe",
 			"_execl", "_execlp", "_execle", "_execv", "_execve", "_execvp", "_execvpe", "execvP",
 			"fork", "vfork", "clone", "pipe",
+			"posix_spawn", "posix_spawnp", "spawn", "spawnv", "_spawnv", "wspawnv", "_wspawnv",
 			// i/o functions can be used insecurely
 			"open", "open64", "openat", "openat64", "fopen", "fopen64", "freopen", "freopen64", "dlopen", "connect",
 			"copylist", "dbm_open", "dbminit",
