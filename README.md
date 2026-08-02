@@ -15,7 +15,7 @@ A collection of my Ghidra scripts to facilitate reverse engineering and vulnerab
 
 ![](https://raw.githubusercontent.com/0xdea/ghidra-scripts/main/.img/re.jpg)
 
-## Blog post
+## Article
 
 * <https://hnsecurity.it/blog/automating-binary-vulnerability-discovery-with-ghidra-and-semgrep/>
 
