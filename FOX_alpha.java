@@ -67,7 +67,8 @@ import ghidra.program.model.symbol.*;
 import ghidra.program.model.listing.*;
 import ghidra.program.model.lang.*;
 import ghidra.program.model.address.*;
-import ghidra.app.util.DisplayableEol;
+import ghidra.app.util.EolComments;
+import ghidra.app.util.viewer.field.EolExtraCommentsOption;
 
 public class FOX_alpha extends GhidraScript 
 {
@@ -192,12 +193,12 @@ public class FOX_alpha extends GhidraScript
 
 				// it looks like the method name is always returned this way,
 				// even if there is more than one line in the autocomment...
-				DisplayableEol eol = new DisplayableEol(instr, true, true, true, true, 1, true);
-				String[] comment = eol.getAutomaticComment();
+				List<String> comment = new EolComments(instr, true, 1,
+					new EolExtraCommentsOption()).getAutomaticComment();
 
 				// extract the real method name from autocomment, handling empty comments
-				if ((comment != null) && (comment.length > 0)) {
-						String realName = comment[0].replaceAll("\"", "").replace("= ", "");
+				if (!comment.isEmpty()) {
+						String realName = comment.get(0).replaceAll("\"", "").replace("= ", "");
 						printf("\t%s | %s\n", instr, realName);
 						return realName;
 				}
