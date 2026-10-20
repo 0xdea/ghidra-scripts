@@ -25,7 +25,8 @@ A collection of my Ghidra scripts to facilitate reverse engineering and vulnerab
 
 ## Compatibility
 
-* Tested with Ghidra 12.0.2
+* Rhabdomancer and Haruspex have been tested with Ghidra 12.0.2.
+* FOX_alpha and ResolveMipsN32LinuxSyscallsScript are unsupported PoCs.
 
 ## Scripts
 
