@@ -3,9 +3,8 @@
 [![](https://img.shields.io/github/stars/0xdea/ghidra-scripts.svg?style=flat&color=yellow)](https://github.com/0xdea/ghidra-scripts)
 [![](https://img.shields.io/github/forks/0xdea/ghidra-scripts.svg?style=flat&color=green)](https://github.com/0xdea/ghidra-scripts)
 [![](https://img.shields.io/github/watchers/0xdea/ghidra-scripts.svg?style=flat&color=red)](https://github.com/0xdea/ghidra-scripts)
-[![](https://img.shields.io/badge/ghidra-12.0.2-violet)](http://ghidra-sre.org)
-[![](https://img.shields.io/badge/twitter-%400xdea-blue.svg)](https://twitter.com/0xdea)
-[![](https://img.shields.io/badge/mastodon-%40raptor-purple.svg)](https://infosec.exchange/@raptor)
+[![](https://img.shields.io/badge/ghidra-12.0.2-purple)](http://ghidra-sre.org)
+[![](https://img.shields.io/badge/mastodon-%40raptor-blue.svg)](https://infosec.exchange/@raptor)
 
 > "Humans are more suited to recognize food than to keep large graphs in their head."
 >
